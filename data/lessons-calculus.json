@@ -1,0 +1,57 @@
+{
+  "subject": "calculus",
+  "title": "Calculus",
+  "icon": "∫",
+  "color": "#FF6B9D",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "What is a Limit?",
+      "difficulty": "beginner",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>limit</b> describes the value that a function approaches as the input approaches some value. Limits are the foundation of calculus — they help us understand instantaneous rates of change and areas under curves." },
+        { "type": "math", "content": "lim f(x) = L as x → a" },
+        { "type": "text", "content": "In simple terms: as x gets closer and closer to a, f(x) gets closer and closer to L." },
+        { "type": "callout", "kind": "tip", "content": "💡 Think of a limit like approaching a destination — you get closer and closer, even if you never quite reach it!" },
+        { "type": "text", "content": "For example, consider the function f(x) = 2x + 1. As x approaches 3, the function approaches 7. We write this as:" },
+        { "type": "math", "content": "lim (2x + 1) = 7 as x → 3" },
+        { "type": "quiz-check", "question": "What is the limit of f(x) = 3x as x approaches 2?", "options": ["5", "6", "8", "3"], "correctIndex": 1, "explanation": "As x approaches 2, 3x approaches 3(2) = 6." }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Introduction to Derivatives",
+      "difficulty": "beginner",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>derivative</b> measures the rate at which a function changes. If you've ever calculated the slope of a line, you've already found a derivative!" },
+        { "type": "math", "content": "Slope = (change in y) / (change in x) = Δy / Δx" },
+        { "type": "text", "content": "For a curved line, the slope changes at every point. The derivative tells us the slope at any single point — it's the instantaneous rate of change." },
+        { "type": "callout", "kind": "info", "content": "📝 The notation f'(x) (read as 'f prime of x') represents the derivative of function f at point x." },
+        { "type": "text", "content": "<b>The Power Rule</b> is one of the simplest derivative rules:<br><br>If f(x) = xⁿ, then f'(x) = n · xⁿ⁻¹" },
+        { "type": "math", "content": "f(x) = x² → f'(x) = 2x" },
+        { "type": "text", "content": "This means: for every unit increase in x, the function x² is increasing at a rate of 2x." },
+        { "type": "quiz-check", "question": "What is the derivative of f(x) = x³?", "options": ["3x", "3x²", "x²", "3x³"], "correctIndex": 1, "explanation": "Using the power rule: bring down the 3, reduce the power by 1: 3x²." }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Basic Integration",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "An <b>integral</b> is the reverse of a derivative — it finds the original function when you know its rate of change. It also represents the <b>area under a curve</b>." },
+        { "type": "math", "content": "∫ f'(x) dx = f(x) + C" },
+        { "type": "text", "content": "The ∫ symbol looks like an elongated S (for 'sum'). The +C is the <b>constant of integration</b> — when you reverse a derivative, you need to account for any constant that might have been there originally." },
+        { "type": "callout", "kind": "tip", "content": "🌟 Since the derivative of any constant is 0, we add +C when integrating!" },
+        { "type": "text", "content": "<b>The Power Rule for Integration</b>:<br><br>∫ xⁿ dx = xⁿ⁺¹ / (n+1) + C (as long as n ≠ -1)" },
+        { "type": "math", "content": "∫ 2x dx = x² + C" },
+        { "type": "quiz-check", "question": "What is ∫ 3x² dx?", "options": ["x³ + C", "6x + C", "x² + C", "3x³ + C"], "correctIndex": 0, "explanation": "Using the power rule: add 1 to the exponent: 3x³/3 = x³ + C." }
+      ]
+    }
+  ]
+}

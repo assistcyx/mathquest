@@ -1,0 +1,22 @@
+{
+  "base": {
+    "skinColor": "#FFE0D0",
+    "eyeColor": "#4A90D9",
+    "hairColor": "#FF9EC4",
+    "height": 260,
+    "width": 200
+  },
+  "slots": {
+    "outfit": { "default": "default", "options": ["default", "casual", "magical", "sporty", "formal", "cozy"] },
+    "accessory": { "default": "none", "options": ["none", "cat_ears", "bow", "glasses", "crown", "ribbon", "star_headband"] },
+    "background": { "default": "classroom", "options": ["classroom", "starry", "beach", "library", "magical", "garden"] }
+  },
+  "moods": {
+    "idle": { "eyes": "normal", "mouth": "smile" },
+    "happy": { "eyes": "happy_closed", "mouth": "big_smile", "animation": "bounce" },
+    "encouraging": { "eyes": "determined", "mouth": "warm_smile", "animation": "gentle_sway" },
+    "celebrating": { "eyes": "star_eyes", "mouth": "open_happy", "animation": "jump_spin" },
+    "sad": { "eyes": "teary", "mouth": "frown", "animation": "droop" },
+    "thinking": { "eyes": "looking_up", "mouth": "tiny_o", "animation": "tilt" }
+  }
+}

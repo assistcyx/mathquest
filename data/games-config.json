@@ -1,0 +1,56 @@
+{
+  "quiz": {
+    "timeLimitSeconds": 60,
+    "questionsPerGame": 10,
+    "creditPerCorrect": 5,
+    "xpPerCorrect": 20,
+    "questions": [
+      { "id": "q1", "subject": "calculus", "difficulty": "easy", "question": "What is the derivative of x²?", "options": ["2x", "x", "2", "x²/2"], "correctIndex": 0, "hint": "Power rule: bring down the exponent" },
+      { "id": "q2", "subject": "calculus", "difficulty": "easy", "question": "What is the limit of 1/x as x approaches infinity?", "options": ["0", "1", "Infinity", "Undefined"], "correctIndex": 0, "hint": "Think about what happens when x gets very large" },
+      { "id": "q3", "subject": "calculus", "difficulty": "easy", "question": "What is the integral of 2x?", "options": ["x² + C", "2 + C", "x²/2 + C", "2x² + C"], "correctIndex": 0, "hint": "Reverse of derivative" },
+      { "id": "q4", "subject": "calculus", "difficulty": "medium", "question": "What does the derivative represent?", "options": ["Rate of change", "Area under curve", "Sum of values", "Average value"], "correctIndex": 0, "hint": "Think about slope" },
+      { "id": "q5", "subject": "calculus", "difficulty": "medium", "question": "What is the derivative of sin(x)?", "options": ["cos(x)", "-sin(x)", "tan(x)", "-cos(x)"], "correctIndex": 0, "hint": "Think about the derivative of trig functions" },
+      { "id": "q6", "subject": "calculus", "difficulty": "easy", "question": "What is the integral of 1?", "options": ["x + C", "0", "1 + C", "x² + C"], "correctIndex": 0, "hint": "What function has derivative 1?" },
+      { "id": "q7", "subject": "calculus", "difficulty": "medium", "question": "What is the limit of (sin x)/x as x approaches 0?", "options": ["1", "0", "Infinity", "Undefined"], "correctIndex": 0, "hint": "This is a famous limit!" },
+      { "id": "q8", "subject": "calculus", "difficulty": "hard", "question": "What is the derivative of e^x?", "options": ["e^x", "xe^(x-1)", "ln(x)e^x", "1"], "correctIndex": 0, "hint": "e^x is special" },
+      { "id": "q9", "subject": "calculus", "difficulty": "medium", "question": "What is the chain rule used for?", "options": ["Composite functions", "Product of functions", "Quotient of functions", "Inverse functions"], "correctIndex": 0, "hint": "Functions within functions" },
+      { "id": "q10", "subject": "calculus", "difficulty": "hard", "question": "What is the derivative of ln(x)?", "options": ["1/x", "1/x²", "ln(x)", "x"], "correctIndex": 0, "hint": "Think about the derivative of natural log" },
+      { "id": "q11", "subject": "python", "difficulty": "easy", "question": "What data type is 'hello'?", "options": ["str", "int", "list", "bool"], "correctIndex": 0, "hint": "It's surrounded by quotes" },
+      { "id": "q12", "subject": "python", "difficulty": "easy", "question": "What does len('Python') return?", "options": ["6", "5", "7", "Error"], "correctIndex": 0, "hint": "Count the letters" },
+      { "id": "q13", "subject": "python", "difficulty": "medium", "question": "What keyword creates a function?", "options": ["def", "function", "func", "define"], "correctIndex": 0, "hint": "Short for 'define'" },
+      { "id": "q14", "subject": "python", "difficulty": "medium", "question": "What is the correct way to create a list?", "options": ["[1, 2, 3]", "{1, 2, 3}", "(1, 2, 3)", "<1, 2, 3>"], "correctIndex": 0, "hint": "Lists use square brackets" },
+      { "id": "q15", "subject": "python", "difficulty": "hard", "question": "What does range(3) produce?", "options": ["0, 1, 2", "1, 2, 3", "0, 1, 2, 3", "1, 2"], "correctIndex": 0, "hint": "range starts at 0" }
+    ]
+  },
+  "codeChallenge": {
+    "timeLimitSeconds": 120,
+    "challenges": [
+      { "id": "cc1", "difficulty": "easy", "instructions": "Fill in the blank to create a greeting function:", "code": "def greet(name):\n    return \"Hello, \" + ___", "blankLabel": "___", "correctAnswer": "name", "hint": "What parameter was passed to the function?", "options": ["name", "greeting", "\"World\"", "person"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc2", "difficulty": "easy", "instructions": "Fill in the blank to check if a number is even:", "code": "def is_even(n):\n    return n ___ 2 == 0", "blankLabel": "___", "correctAnswer": "%", "hint": "What operator gives you the remainder?", "options": ["%", "/", "*", "+"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc3", "difficulty": "medium", "instructions": "Fill in the blank to create a list of numbers 0-4:", "code": "numbers = list(___(5))", "blankLabel": "___", "correctAnswer": "range", "hint": "Function that generates a sequence of numbers", "options": ["range", "len", "sum", "enumerate"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc4", "difficulty": "medium", "instructions": "What will this code output?", "code": "x = 5\ny = 3\nprint(x ** y)", "blankLabel": "Output:", "correctAnswer": "125", "hint": "** is the exponentiation operator", "options": ["125", "15", "8", "243"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc5", "difficulty": "hard", "instructions": "Fill in the blank to add an item to a list:", "code": "fruits = [\"apple\", \"banana\"]\nfruits.___(\"cherry\")", "blankLabel": "___", "correctAnswer": "append", "hint": "Method to add an element to the end of a list", "options": ["append", "add", "insert", "push"], "creditReward": 8, "xpReward": 30 }
+    ]
+  },
+  "matching": {
+    "timeLimitSeconds": 90,
+    "sets": [
+      {
+        "id": "ms1",
+        "title": "Calculus Terms",
+        "pairs": [
+          { "term": "Derivative", "definition": "Rate of change of a function" },
+          { "term": "Integral", "definition": "Area under a curve" },
+          { "term": "Limit", "definition": "Value a function approaches" },
+          { "term": "Variable", "definition": "A symbol that represents a value" },
+          { "term": "Function", "definition": "Maps inputs to outputs" },
+          { "term": "Algorithm", "definition": "Step-by-step procedure" },
+          { "term": "Loop", "definition": "Repeats a block of code" },
+          { "term": "Conditional", "definition": "Executes code based on a condition" }
+        ],
+        "creditReward": 12,
+        "xpReward": 40
+      }
+    ]
+  }
+}

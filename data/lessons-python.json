@@ -1,0 +1,55 @@
+{
+  "subject": "python",
+  "title": "Python Programming",
+  "icon": "🐍",
+  "color": "#34D399",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Variables & Data Types",
+      "difficulty": "beginner",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "In Python, <b>variables</b> are used to store data. Think of them as labeled boxes where you can put values. You create a variable by giving it a name and assigning a value with the = sign." },
+        { "type": "code-block", "language": "python", "content": "name = \"Alice\"\nage = 15\nheight = 1.65\nis_student = True\n\nprint(f\"{name} is {age} years old\")" },
+        { "type": "text", "content": "Python has several basic <b>data types</b>:" },
+        { "type": "text", "content": "🔤 <b>Strings (str)</b>: Text like \"Hello\" or 'Python'<br>🔢 <b>Integers (int)</b>: Whole numbers like 42 or -7<br>📏 <b>Floats (float)</b>: Decimal numbers like 3.14<br>✅ <b>Booleans (bool)</b>: True or False" },
+        { "type": "callout", "kind": "info", "content": "💡 Python is 'dynamically typed' — you don't need to declare the type! Python figures it out from the value you assign." },
+        { "type": "quiz-check", "question": "What type is the variable x = 3.14?", "options": ["int", "float", "str", "bool"], "correctIndex": 1, "explanation": "3.14 has a decimal point, so it's a float." }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Lists & Loops",
+      "difficulty": "beginner",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>list</b> is a collection of items stored in order. Lists are created with square brackets [] and can hold any type of data." },
+        { "type": "code-block", "language": "python", "content": "fruits = [\"apple\", \"banana\", \"cherry\"]\nnumbers = [1, 2, 3, 4, 5]\nmixed = [\"hello\", 42, True, 3.14]\n\nprint(fruits[0])  # \"apple\"\nprint(fruits[-1]) # \"cherry\"" },
+        { "type": "text", "content": "A <b>for loop</b> lets you repeat code for each item in a list:" },
+        { "type": "code-block", "language": "python", "content": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor fruit in fruits:\n    print(f\"I like {fruit}\")\n\n# Output:\n# I like apple\n# I like banana\n# I like cherry" },
+        { "type": "text", "content": "Use <b>range()</b> to repeat something a specific number of times:" },
+        { "type": "code-block", "language": "python", "content": "for i in range(5):\n    print(i)\n\n# Output: 0, 1, 2, 3, 4" },
+        { "type": "callout", "kind": "tip", "content": "🔁 Python indices start at 0! So range(5) gives you 0, 1, 2, 3, 4 — five numbers total." },
+        { "type": "quiz-check", "question": "What does fruits[0] give you from fruits = ['apple', 'banana', 'cherry']?", "options": ["'banana'", "'cherry'", "'apple'", "Error"], "correctIndex": 2, "explanation": "Python indices start at 0, so fruits[0] is the first element: 'apple'." }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Functions",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>function</b> is a reusable block of code that performs a specific task. Functions help you organize your code and avoid repetition." },
+        { "type": "code-block", "language": "python", "content": "def greet(name):\n    \"\"\"Say hello to someone\"\"\"\n    return f\"Hello, {name}!\"\n\nmessage = greet(\"Alice\")\nprint(message)  # Hello, Alice!" },
+        { "type": "text", "content": "Functions can take <b>parameters</b> (inputs) and <b>return</b> values (outputs). The <b>def</b> keyword defines a function, and everything indented below it is part of the function." },
+        { "type": "callout", "kind": "info", "content": "📝 The text in triple quotes right after def is called a 'docstring' — it documents what the function does." },
+        { "type": "code-block", "language": "python", "content": "def add(a, b):\n    \"\"\"Add two numbers and return the result\"\"\"\n    result = a + b\n    return result\n\nsum = add(5, 3)\nprint(sum)  # 8" },
+        { "type": "quiz-check", "question": "What keyword is used to define a function in Python?", "options": ["function", "def", "func", "define"], "correctIndex": 1, "explanation": "Python uses the 'def' keyword to define functions." }
+      ]
+    }
+  ]
+}

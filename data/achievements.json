@@ -1,0 +1,74 @@
+[
+  {
+    "id": "first_lesson",
+    "title": "First Steps",
+    "description": "Complete your first lesson",
+    "icon": "📚",
+    "condition": { "type": "lessons_completed", "subject": "any", "count": 1 },
+    "creditReward": 20,
+    "xpReward": 50
+  },
+  {
+    "id": "calculus_novice",
+    "title": "Calculus Novice",
+    "description": "Complete all calculus lessons",
+    "icon": "∫",
+    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 3 },
+    "creditReward": 50,
+    "xpReward": 100
+  },
+  {
+    "id": "python_basics",
+    "title": "Python Basics",
+    "description": "Complete all Python lessons",
+    "icon": "🐍",
+    "condition": { "type": "lessons_completed", "subject": "python", "count": 3 },
+    "creditReward": 50,
+    "xpReward": 100
+  },
+  {
+    "id": "game_master",
+    "title": "Game Master",
+    "description": "Score 100% on any quiz",
+    "icon": "🎮",
+    "condition": { "type": "quiz_score", "score": 100 },
+    "creditReward": 30,
+    "xpReward": 75
+  },
+  {
+    "id": "shopaholic",
+    "title": "Shopaholic",
+    "description": "Buy 3 items from the shop",
+    "icon": "🛍️",
+    "condition": { "type": "items_purchased", "count": 3 },
+    "creditReward": 25,
+    "xpReward": 60
+  },
+  {
+    "id": "level_5",
+    "title": "Getting Stronger",
+    "description": "Reach level 5",
+    "icon": "⭐",
+    "condition": { "type": "level_reached", "count": 5 },
+    "creditReward": 40,
+    "xpReward": 100
+  },
+  {
+    "id": "quiz_champion",
+    "title": "Quiz Champion",
+    "description": "Play 3 quizzes",
+    "icon": "🏆",
+    "condition": { "type": "games_played", "count": 3 },
+    "creditReward": 30,
+    "xpReward": 80
+  },
+  {
+    "id": "dedicated",
+    "title": "Dedicated Student",
+    "description": "Earn 500 XP total",
+    "icon": "💪",
+    "condition": { "type": "xp_reached", "count": 500 },
+    "creditReward": 50,
+    "xpReward": 100
+  }
+]

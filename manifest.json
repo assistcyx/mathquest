@@ -1,0 +1,16 @@
+{
+  "name": "MathQuest",
+  "short_name": "MathQuest",
+  "description": "Learn calculus and Python through fun games with your learning partner!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF5F9",
+  "theme_color": "#FF6B9D",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

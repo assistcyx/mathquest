@@ -1,0 +1,223 @@
+/* ===== Shop Page ===== */
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.shop-balance {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-warning-dark);
+}
+
+.shop-balance .coin-icon {
+  font-size: var(--text-xl);
+}
+
+.shop-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  background: var(--color-bg-alt);
+  padding: var(--space-xs);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-xl);
+}
+
+.shop-tab {
+  flex: 1;
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: center;
+}
+
+.shop-tab:hover {
+  color: var(--color-text);
+}
+
+.shop-tab.active {
+  background: white;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.shop-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.shop-item {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  border: 2px solid var(--color-border-light);
+  transition: all var(--transition-normal);
+  text-align: center;
+  position: relative;
+}
+
+.shop-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--color-primary-light);
+}
+
+.shop-item.owned {
+  border-color: var(--color-success);
+  background: var(--color-success-light);
+}
+
+.shop-item.equipped {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.shop-item-preview {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.shop-item-name {
+  font-weight: 700;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.shop-item-desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.shop-item-price {
+  font-weight: 700;
+  color: var(--color-warning-dark);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.shop-item-badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+}
+
+.shop-item-rarity {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  font-size: var(--text-xs);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.rarity-common {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.rarity-rare {
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.rarity-epic {
+  background: #F3E8FF;
+  color: #7C3AED;
+}
+
+/* ===== Shop Confirmation ===== */
+.shop-confirm {
+  text-align: center;
+}
+
+.shop-confirm .item-preview-big {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.shop-confirm .item-name-big {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.shop-confirm .item-cost {
+  font-size: var(--text-lg);
+  color: var(--color-warning-dark);
+  font-weight: 700;
+}
+
+/* ===== Featured Item ===== */
+.shop-featured {
+  background: linear-gradient(135deg, #FEF3C7, #FFFBEB);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.shop-featured-badge {
+  background: var(--color-warning);
+  color: white;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.shop-featured-info {
+  flex: 1;
+}
+
+.shop-featured-info h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-xs);
+}
+
+.shop-featured-info p {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .shop-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .shop-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shop-featured {
+    flex-direction: column;
+    text-align: center;
+  }
+}

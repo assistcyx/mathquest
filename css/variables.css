@@ -1,0 +1,90 @@
+:root {
+  /* Colors — pastel anime palette */
+  --color-primary: #FF6B9D;
+  --color-primary-dark: #E55A8A;
+  --color-primary-light: #FFB5D2;
+  --color-primary-lighter: #FFE0ED;
+  --color-secondary: #C084FC;
+  --color-secondary-dark: #A855F7;
+  --color-secondary-light: #E9D5FF;
+  --color-accent: #60A5FA;
+  --color-accent-dark: #3B82F6;
+  --color-success: #34D399;
+  --color-success-dark: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-warning: #FBBF24;
+  --color-warning-dark: #F59E0B;
+  --color-error: #FB7185;
+  --color-error-dark: #F43F5E;
+  --color-error-light: #FFE4E6;
+
+  --color-bg: #FFF5F9;
+  --color-bg-card: #FFFFFF;
+  --color-bg-alt: #FDF2F8;
+  --color-bg-dark: #1a1a2e;
+
+  --color-text: #4A2040;
+  --color-text-secondary: #7C5C72;
+  --color-text-muted: #A88B9E;
+  --color-text-inverse: #FFFFFF;
+
+  --color-border: #F0E0E8;
+  --color-border-light: #F8F0F4;
+
+  /* Typography */
+  --font-display: 'Fredoka One', 'Comic Neue', cursive;
+  --font-body: 'Nunito', 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(255, 107, 157, 0.1);
+  --shadow-card: 0 4px 16px rgba(255, 107, 157, 0.12);
+  --shadow-float: 0 8px 32px rgba(255, 107, 157, 0.18);
+  --shadow-glow: 0 0 24px rgba(192, 132, 252, 0.25);
+  --shadow-glow-pink: 0 0 24px rgba(255, 107, 157, 0.25);
+
+  /* Gradients */
+  --gradient-pink: linear-gradient(135deg, #FF6B9D, #C084FC);
+  --gradient-green: linear-gradient(135deg, #34D399, #60A5FA);
+  --gradient-gold: linear-gradient(135deg, #FBBF24, #FB7185);
+  --gradient-purple: linear-gradient(135deg, #C084FC, #60A5FA);
+  --gradient-warm: linear-gradient(135deg, #FF9A9E, #FAD0C4);
+  --gradient-header: linear-gradient(135deg, #FFF5F9, #FDF2F8);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Layout */
+  --header-height: 64px;
+  --max-width: 1200px;
+  --sidebar-width: 280px;
+}
