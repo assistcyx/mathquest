@@ -52,6 +52,56 @@
         { "type": "math", "content": "∫ 2x dx = x² + C" },
         { "type": "quiz-check", "question": "What is ∫ 3x² dx?", "options": ["x³ + C", "6x + C", "x² + C", "3x³ + C"], "correctIndex": 0, "explanation": "Using the power rule: add 1 to the exponent: 3x³/3 = x³ + C." }
       ]
+    },
+    {
+      "id": 4,
+      "title": "The Chain Rule",
+      "difficulty": "intermediate",
+      "xpReward": 60,
+      "creditReward": 12,
+      "sections": [
+        { "type": "text", "content": "The <b>Chain Rule</b> is used to differentiate <b>composite functions</b> — functions inside other functions. Think of it like peeling an onion, layer by layer!" },
+        { "type": "math", "content": "If h(x) = f(g(x)), then h'(x) = f'(g(x)) · g'(x)" },
+        { "type": "text", "content": "In words: differentiate the outer function, keep the inner function the same, then multiply by the derivative of the inner function." },
+        { "type": "callout", "kind": "tip", "content": "🧅 The Chain Rule is often summarized as: 'derivative of the outside, times derivative of the inside'" },
+        { "type": "text", "content": "Let's differentiate h(x) = (3x + 1)²:<br><br>Outer function: f(u) = u², so f'(u) = 2u<br>Inner function: g(x) = 3x + 1, so g'(x) = 3<br><br>h'(x) = 2(3x + 1) · 3 = 6(3x + 1)" },
+        { "type": "math", "content": "h(x) = (3x + 1)² → h'(x) = 6(3x + 1)" },
+        { "type": "quiz-check", "question": "What is the derivative of h(x) = (x² + 1)³?", "options": ["3(x² + 1)²", "6x(x² + 1)²", "3x(x² + 1)²", "6x(x² + 1)³"], "correctIndex": 1, "explanation": "Outer derivative: 3(x²+1)². Inner derivative: 2x. Multiply: 6x(x²+1)²." }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Product & Quotient Rules",
+      "difficulty": "intermediate",
+      "xpReward": 60,
+      "creditReward": 12,
+      "sections": [
+        { "type": "text", "content": "When we need to differentiate the <b>product</b> or <b>quotient</b> of two functions, we can't just differentiate each part separately. We need special rules!" },
+        { "type": "math", "content": "Product Rule: (f · g)' = f' · g + f · g'" },
+        { "type": "text", "content": "The <b>Product Rule</b> says: derivative of the first times the second, plus the first times the derivative of the second." },
+        { "type": "callout", "kind": "info", "content": "📝 Mnemonic: 'First times derivative of second plus second times derivative of first' — or 'Left dRight + Right dLeft'!" },
+        { "type": "text", "content": "Example: differentiate h(x) = x² · sin(x)<br><br>f(x) = x² → f'(x) = 2x<br>g(x) = sin(x) → g'(x) = cos(x)<br><br>h'(x) = 2x · sin(x) + x² · cos(x)" },
+        { "type": "math", "content": "Quotient Rule: (f/g)' = (f'·g - f·g') / g²" },
+        { "type": "text", "content": "The <b>Quotient Rule</b> is similar but with a minus sign: 'low d-high minus high d-low, over low squared'. Remember: the minus sign goes in the numerator!" },
+        { "type": "quiz-check", "question": "Using the product rule, what is the derivative of x · e^x?", "options": ["e^x", "x·e^x", "e^x + x·e^x", "x·e^x + e^x"], "correctIndex": 2, "explanation": "f(x)=x, f'(x)=1. g(x)=e^x, g'(x)=e^x. Result: 1·e^x + x·e^x = e^x + x·e^x." }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Applications of Derivatives",
+      "difficulty": "advanced",
+      "xpReward": 75,
+      "creditReward": 15,
+      "sections": [
+        { "type": "text", "content": "Derivatives aren't just abstract math — they have <b>real-world applications</b>! Let's explore optimization and related rates." },
+        { "type": "text", "content": "<b>Optimization</b> is about finding the maximum or minimum value of a function. Steps:<br><br>1. Find the derivative of the function<br>2. Set it equal to zero (critical points)<br>3. Check if each critical point is a max or min using the second derivative" },
+        { "type": "math", "content": "f'(x) = 0 → critical points\nf''(x) > 0 → minimum\nf''(x) < 0 → maximum" },
+        { "type": "callout", "kind": "tip", "content": "🌟 Real-world optimization: minimizing cost, maximizing profit, finding the shortest path, or designing the most efficient container!" },
+        { "type": "text", "content": "<b>Related Rates</b> problems involve finding how fast one quantity changes based on how fast another changes. The chain rule is your best friend here!" },
+        { "type": "text", "content": "Example: A balloon is being inflated. The radius r increases at 2 cm/s. How fast is the volume V increasing when r = 5 cm?<br><br>V = (4/3)πr³<br>dV/dt = 4πr² · dr/dt = 4π(25)(2) = 200π cm³/s" },
+        { "type": "math", "content": "V = ⁴⁄₃πr³ → dV/dt = 4πr² · dr/dt" },
+        { "type": "quiz-check", "question": "The second derivative test: if f''(c) < 0 at a critical point, the point is a...", "options": ["Local minimum", "Local maximum", "Inflection point", "Not enough info"], "correctIndex": 1, "explanation": "A negative second derivative means the function is concave down, which indicates a local maximum." }
+      ]
     }
   ]
 }

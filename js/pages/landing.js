@@ -43,7 +43,7 @@ const LandingPage = {
                   <div style="font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 600;">Credits</div>
                 </div>
                 <div style="text-align: center;">
-                  <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--color-success);">${GameState.get('progress.calculus.completed').length + GameState.get('progress.python.completed').length}</div>
+                  <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--color-success);">${GameState.get('progress.calculus.completed').length + GameState.get('progress.python.completed').length + GameState.get('progress.algebra.completed').length}</div>
                   <div style="font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 600;">Lessons</div>
                 </div>
               </div>

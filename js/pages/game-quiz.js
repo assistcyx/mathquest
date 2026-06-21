@@ -14,6 +14,17 @@ const QuizGame = {
     try {
       const config = await fetch('data/games-config.json').then(r => r.json());
       this._questions = config.quiz?.questions || [];
+
+      // Apply adaptive difficulty if enabled
+      if (typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled()) {
+        const calcMastery = AdaptiveEngine.getSubjectMastery('calculus');
+        const pyMastery = AdaptiveEngine.getSubjectMastery('python');
+        const avgMastery = (calcMastery + pyMastery) / 2;
+        // Auto-select difficulty based on mastery
+        if (avgMastery >= 0.6) this._difficulty = 'hard';
+        else if (avgMastery >= 0.3) this._difficulty = 'medium';
+        else this._difficulty = 'easy';
+      }
     } catch (e) {
       this._questions = this._getDefaultQuestions();
     }
@@ -43,6 +54,11 @@ const QuizGame = {
   },
 
   _renderStart(container) {
+    const name = GameState.get('player.name') || '';
+    const isAdaptive = typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled();
+    const autoDiff = this._difficulty || 'easy';
+    const diffLabels = { easy: '🌟 Easy', medium: '🔥 Medium', hard: '⚡ Hard' };
+
     container.innerHTML = `
       <div class="game-container animate-fade-in" style="text-align: center;">
         <div style="font-size: 3rem; margin-bottom: var(--space-md);">🧮</div>
@@ -51,17 +67,23 @@ const QuizGame = {
           Answer ${this._totalQuestions} calculus questions as fast as you can!<br>
           Earn 5 credits per correct answer.
         </p>
+        ${isAdaptive ? `<div style="margin-bottom: var(--space-md);"><span class="badge badge-purple">🤖 Adaptive: ${diffLabels[autoDiff]}</span></div>` : ''}
         <div style="margin-bottom: var(--space-xl);">
           <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Difficulty</p>
           <div class="difficulty-select">
-            <button class="difficulty-btn selected" data-diff="easy" onclick="QuizGame._setDifficulty(this, 'easy')">🌟 Easy</button>
-            <button class="difficulty-btn" data-diff="medium" onclick="QuizGame._setDifficulty(this, 'medium')">🔥 Medium</button>
-            <button class="difficulty-btn" data-diff="hard" onclick="QuizGame._setDifficulty(this, 'hard')">⚡ Hard</button>
+            <button class="difficulty-btn ${autoDiff === 'easy' || (!isAdaptive && autoDiff === 'easy') ? 'selected' : ''}" data-diff="easy" onclick="QuizGame._setDifficulty(this, 'easy')">🌟 Easy</button>
+            <button class="difficulty-btn ${autoDiff === 'medium' ? 'selected' : ''}" data-diff="medium" onclick="QuizGame._setDifficulty(this, 'medium')">🔥 Medium</button>
+            <button class="difficulty-btn ${autoDiff === 'hard' ? 'selected' : ''}" data-diff="hard" onclick="QuizGame._setDifficulty(this, 'hard')">⚡ Hard</button>
           </div>
         </div>
         <button class="btn btn-primary btn-lg" onclick="QuizGame._startGame()">🚀 Start Quiz!</button>
       </div>
     `;
+
+    // Set AI tutor context
+    if (typeof AiTutor !== 'undefined') {
+      AiTutor._setContext({ currentPage: 'game', gameType: 'Calculus Quiz' });
+    }
   },
 
   _setDifficulty(btn, diff) {
@@ -71,6 +93,7 @@ const QuizGame = {
     const settings = { easy: { time: 60, questions: 8 }, medium: { time: 45, questions: 10 }, hard: { time: 30, questions: 12 } };
     this._timeLimit = settings[diff].time;
     this._totalQuestions = Math.min(settings[diff].questions, this._questions.length);
+    this._difficulty = diff;
   },
 
   _startGame() {
@@ -78,6 +101,16 @@ const QuizGame = {
     this._currentIndex = 0;
     this._score = 0;
     this._timerStarted = false;
+
+    // Apply adaptive difficulty question filtering
+    if (typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled() && this._difficulty) {
+      // Filter questions by the selected/adaptive difficulty
+      const diffQuestions = this._questions.filter(q => q.difficulty === this._difficulty);
+      if (diffQuestions.length >= this._totalQuestions) {
+        this._questions = diffQuestions;
+      }
+    }
+
     this._renderQuestion(document.querySelector('.game-container')?.closest('#app') || document.getElementById('app'));
   },
 
@@ -89,6 +122,11 @@ const QuizGame = {
 
     const q = this._questions[this._currentIndex];
     this._answered = false;
+
+    // Cache question for smart hints
+    if (typeof SmartHints !== 'undefined') {
+      SmartHints.cacheQuestion(q);
+    }
 
     container.innerHTML = `
       <div class="game-container animate-fade-in">
@@ -114,6 +152,8 @@ const QuizGame = {
         </div>
 
         <div id="quiz-explain" style="display: none;"></div>
+
+        ${typeof SmartHints !== 'undefined' ? SmartHints.renderHintButton(q, 'quiz-' + this._currentIndex) : ''}
       </div>
     `;
 
@@ -179,6 +219,12 @@ const QuizGame = {
 
     GameState.addGameStats('quiz', this._score, total);
 
+    // Update adaptive mastery
+    if (typeof AdaptiveEngine !== 'undefined') {
+      AdaptiveEngine.updateMastery('limits', this._score, total);
+      AdaptiveEngine.updateMastery('derivatives', this._score, total);
+    }
+
     container.innerHTML = `
       <div class="game-container animate-bounce-in">
         <div class="game-results">
@@ -215,5 +261,10 @@ const QuizGame = {
 
     GameState.set('partner.currentMood', this._score === this._totalQuestions ? 'celebrating' : 'happy');
     AchievementEngine.check();
+
+    // Set AI tutor context
+    if (typeof AiTutor !== 'undefined') {
+      AiTutor._setContext({ currentPage: 'game', gameType: 'Calculus Quiz' });
+    }
   }
 };

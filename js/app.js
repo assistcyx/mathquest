@@ -87,6 +87,51 @@
     MatchingGame.render(main);
   });
 
+  Router.register('/games/speedmath', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    SpeedMathGame.render(main);
+  });
+
+  Router.register('/games/wordproblems', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    WordProblemsGame.render(main);
+  });
+
+  Router.register('/games/bossbattle', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    BossBattleGame.render(main);
+  });
+
+  Router.register('/ai-tutor', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    AiTutor.render(main);
+  });
+
+  Router.register('/lessons/algebra/:id', (app, params) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    LessonViewer.render(main, { subject: 'algebra', id: params.id });
+  });
+
   Router.register('/partner', (app) => {
     app.innerHTML = '';
     app.appendChild(Header.render());

@@ -137,10 +137,16 @@ const PartnerPage = {
     const credits = GameState.get('player.credits') || 0;
     const completedCalc = (GameState.get('progress.calculus.completed') || []).length;
     const completedPy = (GameState.get('progress.python.completed') || []).length;
+    const completedAlg = (GameState.get('progress.algebra.completed') || []).length;
     const quizzesPlayed = GameState.get('gameStats.quizzesPlayed') || 0;
     const matchesCompleted = GameState.get('gameStats.matchesCompleted') || 0;
+    const speedMathPlayed = GameState.get('gameStats.speedMathPlayed') || 0;
+    const wpPlayed = GameState.get('gameStats.wordProblemsPlayed') || 0;
+    const bossWon = GameState.get('gameStats.bossBattlesWon') || 0;
+    const aiQuestions = GameState.get('_aiQuestionsAsked') || 0;
     const achievements = (GameState.get('achievements.unlocked') || []).length;
     const affection = GameState.get('partner.affection') || 0;
+    const topMastery = typeof AdaptiveEngine !== 'undefined' ? AdaptiveEngine.getTopMasteryTopic() : null;
 
     return `
       <div class="partner-tab-content active">
@@ -153,10 +159,15 @@ const PartnerPage = {
             <div><strong>Credits:</strong> ${credits}</div>
             <div><strong>Calc Lessons:</strong> ${completedCalc}</div>
             <div><strong>Python Lessons:</strong> ${completedPy}</div>
+            <div><strong>Algebra Lessons:</strong> ${completedAlg}</div>
             <div><strong>Quizzes Played:</strong> ${quizzesPlayed}</div>
-            <div><strong>Games Played:</strong> ${matchesCompleted}</div>
+            <div><strong>Speed Math:</strong> ${speedMathPlayed}</div>
+            <div><strong>Word Problems:</strong> ${wpPlayed}</div>
+            <div><strong>Bosses Defeated:</strong> ${bossWon}</div>
+            <div><strong>AI Questions:</strong> ${aiQuestions}</div>
             <div><strong>Achievements:</strong> ${achievements}</div>
             <div><strong>Bond Level:</strong> ${Math.floor(affection / 100)}</div>
+            ${topMastery ? `<div><strong>Best Topic:</strong> ${topMastery.label} (${Math.round(topMastery.score * 100)}%)</div>` : ''}
           </div>
         </div>
         <button class="btn btn-ghost btn-sm" onclick="Modal.confirm({

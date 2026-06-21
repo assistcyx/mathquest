@@ -13,7 +13,7 @@
     "title": "Calculus Novice",
     "description": "Complete all calculus lessons",
     "icon": "∫",
-    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 3 },
+    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 6 },
     "creditReward": 50,
     "xpReward": 100
   },
@@ -22,7 +22,7 @@
     "title": "Python Basics",
     "description": "Complete all Python lessons",
     "icon": "🐍",
-    "condition": { "type": "lessons_completed", "subject": "python", "count": 3 },
+    "condition": { "type": "lessons_completed", "subject": "python", "count": 6 },
     "creditReward": 50,
     "xpReward": 100
   },
@@ -70,5 +70,77 @@
     "condition": { "type": "xp_reached", "count": 500 },
     "creditReward": 50,
     "xpReward": 100
+  },
+  {
+    "id": "algebra_basics",
+    "title": "Algebra Adept",
+    "description": "Complete all algebra lessons",
+    "icon": "x+y",
+    "condition": { "type": "lessons_completed", "subject": "algebra", "count": 3 },
+    "creditReward": 50,
+    "xpReward": 100
+  },
+  {
+    "id": "speed_demon",
+    "title": "Speed Demon",
+    "description": "Score 100% on Speed Math",
+    "icon": "⚡",
+    "condition": { "type": "speed_math_perfect", "score": 100 },
+    "creditReward": 30,
+    "xpReward": 75
+  },
+  {
+    "id": "problem_solver",
+    "title": "Problem Solver",
+    "description": "Complete 10 word problems",
+    "icon": "📝",
+    "condition": { "type": "word_problems_played", "count": 10 },
+    "creditReward": 30,
+    "xpReward": 75
+  },
+  {
+    "id": "boss_slayer",
+    "title": "Boss Slayer",
+    "description": "Defeat a Boss Battle",
+    "icon": "🐉",
+    "condition": { "type": "boss_battles_won", "count": 1 },
+    "creditReward": 50,
+    "xpReward": 150
+  },
+  {
+    "id": "ai_explorer",
+    "title": "AI Explorer",
+    "description": "Ask 5 questions to the AI Tutor",
+    "icon": "🤖",
+    "condition": { "type": "ai_questions_asked", "count": 5 },
+    "creditReward": 30,
+    "xpReward": 75
+  },
+  {
+    "id": "master_student",
+    "title": "Master Student",
+    "description": "Reach 100% mastery in any topic",
+    "icon": "🌟",
+    "condition": { "type": "mastery_perfect", "score": 100 },
+    "creditReward": 50,
+    "xpReward": 150
+  },
+  {
+    "id": "calculus_master",
+    "title": "Calculus Master",
+    "description": "Complete all advanced calculus lessons",
+    "icon": "📐",
+    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 6 },
+    "creditReward": 75,
+    "xpReward": 200
+  },
+  {
+    "id": "python_pro",
+    "title": "Python Pro",
+    "description": "Complete all advanced Python lessons",
+    "icon": "🐍",
+    "condition": { "type": "lessons_completed", "subject": "python", "count": 6 },
+    "creditReward": 75,
+    "xpReward": 200
   }
 ]

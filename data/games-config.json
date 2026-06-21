@@ -19,7 +19,12 @@
       { "id": "q12", "subject": "python", "difficulty": "easy", "question": "What does len('Python') return?", "options": ["6", "5", "7", "Error"], "correctIndex": 0, "hint": "Count the letters" },
       { "id": "q13", "subject": "python", "difficulty": "medium", "question": "What keyword creates a function?", "options": ["def", "function", "func", "define"], "correctIndex": 0, "hint": "Short for 'define'" },
       { "id": "q14", "subject": "python", "difficulty": "medium", "question": "What is the correct way to create a list?", "options": ["[1, 2, 3]", "{1, 2, 3}", "(1, 2, 3)", "<1, 2, 3>"], "correctIndex": 0, "hint": "Lists use square brackets" },
-      { "id": "q15", "subject": "python", "difficulty": "hard", "question": "What does range(3) produce?", "options": ["0, 1, 2", "1, 2, 3", "0, 1, 2, 3", "1, 2"], "correctIndex": 0, "hint": "range starts at 0" }
+      { "id": "q15", "subject": "python", "difficulty": "hard", "question": "What does range(3) produce?", "options": ["0, 1, 2", "1, 2, 3", "0, 1, 2, 3", "1, 2"], "correctIndex": 0, "hint": "range starts at 0" },
+      { "id": "q16", "subject": "calculus", "difficulty": "medium", "question": "What is the derivative of 5x³?", "options": ["15x²", "5x²", "15x³", "5x³"], "correctIndex": 0, "hint": "Power rule: 5 × 3x² = 15x²" },
+      { "id": "q17", "subject": "calculus", "difficulty": "hard", "question": "What is ∫ sin(x) dx?", "options": ["-cos(x) + C", "cos(x) + C", "sin(x) + C", "-sin(x) + C"], "correctIndex": 0, "hint": "Derivative of cos is -sin, so derivative of -cos is sin" },
+      { "id": "q18", "subject": "python", "difficulty": "hard", "question": "What does {1, 2, 3} & {3, 4, 5} return?", "options": ["{3}", "{1, 2, 3, 4, 5}", "{1, 2}", "Error"], "correctIndex": 0, "hint": "The & operator finds the intersection of two sets" },
+      { "id": "q19", "subject": "calculus", "difficulty": "medium", "question": "What is the derivative of x⁴?", "options": ["4x³", "4x⁴", "x³", "3x⁴"], "correctIndex": 0, "hint": "Bring down the 4, reduce power by 1" },
+      { "id": "q20", "subject": "python", "difficulty": "medium", "question": "What does 'hello'.upper() return?", "options": ["'HELLO'", "'hello'", "'Hello'", "Error"], "correctIndex": 0, "hint": "The upper() method converts to uppercase" }
     ]
   },
   "codeChallenge": {
@@ -29,7 +34,9 @@
       { "id": "cc2", "difficulty": "easy", "instructions": "Fill in the blank to check if a number is even:", "code": "def is_even(n):\n    return n ___ 2 == 0", "blankLabel": "___", "correctAnswer": "%", "hint": "What operator gives you the remainder?", "options": ["%", "/", "*", "+"], "creditReward": 8, "xpReward": 30 },
       { "id": "cc3", "difficulty": "medium", "instructions": "Fill in the blank to create a list of numbers 0-4:", "code": "numbers = list(___(5))", "blankLabel": "___", "correctAnswer": "range", "hint": "Function that generates a sequence of numbers", "options": ["range", "len", "sum", "enumerate"], "creditReward": 8, "xpReward": 30 },
       { "id": "cc4", "difficulty": "medium", "instructions": "What will this code output?", "code": "x = 5\ny = 3\nprint(x ** y)", "blankLabel": "Output:", "correctAnswer": "125", "hint": "** is the exponentiation operator", "options": ["125", "15", "8", "243"], "creditReward": 8, "xpReward": 30 },
-      { "id": "cc5", "difficulty": "hard", "instructions": "Fill in the blank to add an item to a list:", "code": "fruits = [\"apple\", \"banana\"]\nfruits.___(\"cherry\")", "blankLabel": "___", "correctAnswer": "append", "hint": "Method to add an element to the end of a list", "options": ["append", "add", "insert", "push"], "creditReward": 8, "xpReward": 30 }
+      { "id": "cc5", "difficulty": "hard", "instructions": "Fill in the blank to add an item to a list:", "code": "fruits = [\"apple\", \"banana\"]\nfruits.___(\"cherry\")", "blankLabel": "___", "correctAnswer": "append", "hint": "Method to add an element to the end of a list", "options": ["append", "add", "insert", "push"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc6", "difficulty": "medium", "instructions": "Fill in the blank to get a value from a dictionary:", "code": "student = {\"name\": \"Alice\", \"age\": 15}\nprint(student.___(\"name\"))", "blankLabel": "___", "correctAnswer": "get", "hint": "Method to safely access a dictionary key", "options": ["get", "find", "access", "key"], "creditReward": 8, "xpReward": 30 },
+      { "id": "cc7", "difficulty": "hard", "instructions": "Fill in the blank to handle an error:", "code": "___:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print(\"Oops!\")", "blankLabel": "___", "correctAnswer": "try", "hint": "Keyword that starts an error handling block", "options": ["try", "attempt", "test", "check"], "creditReward": 8, "xpReward": 30 }
     ]
   },
   "matching": {
@@ -50,7 +57,54 @@
         ],
         "creditReward": 12,
         "xpReward": 40
+      },
+      {
+        "id": "ms2",
+        "title": "Algebra Terms",
+        "pairs": [
+          { "term": "Coefficient", "definition": "A number multiplied by a variable" },
+          { "term": "Variable", "definition": "A symbol representing an unknown value" },
+          { "term": "Quadratic", "definition": "An equation with x² as highest power" },
+          { "term": "System of Equations", "definition": "Two or more equations with the same variables" },
+          { "term": "Inequality", "definition": "A relation using <, >, ≤, or ≥" },
+          { "term": "Slope", "definition": "The steepness of a line (rise/run)" },
+          { "term": "Intercept", "definition": "Where a line crosses an axis" },
+          { "term": "Factor", "definition": "Breaking an expression into products" }
+        ],
+        "creditReward": 12,
+        "xpReward": 40
       }
+    ]
+  },
+  "wordProblems": {
+    "timeLimitSeconds": 90,
+    "questions": [
+      { "id": "wp1", "difficulty": "easy", "question": "Sarah has 12 apples. She gives 5 to her friend. How many apples does she have left?", "options": ["5", "7", "12", "17"], "correctIndex": 1, "hint": "Subtract 5 from 12", "creditReward": 6, "xpReward": 25 },
+      { "id": "wp2", "difficulty": "easy", "question": "A train travels at 60 miles per hour. How far will it travel in 3 hours?", "options": ["120 miles", "180 miles", "200 miles", "60 miles"], "correctIndex": 1, "hint": "Multiply speed by time", "creditReward": 6, "xpReward": 25 },
+      { "id": "wp3", "difficulty": "easy", "question": "Tom has 3 times as many marbles as Jerry. Jerry has 4 marbles. How many marbles does Tom have?", "options": ["7", "8", "12", "15"], "correctIndex": 2, "hint": "Multiply Jerry's marbles by 3", "creditReward": 6, "xpReward": 25 },
+      { "id": "wp4", "difficulty": "medium", "question": "A pizza is cut into 8 slices. If 3 people eat 2 slices each, how many slices are left?", "options": ["1", "2", "3", "4"], "correctIndex": 1, "hint": "Calculate total eaten, then subtract from 8", "creditReward": 8, "xpReward": 30 },
+      { "id": "wp5", "difficulty": "medium", "question": "The sum of two numbers is 20. Their difference is 4. What are the numbers?", "options": ["10 and 10", "12 and 8", "14 and 6", "9 and 11"], "correctIndex": 1, "hint": "Let the numbers be a and b. a+b=20, a-b=4", "creditReward": 8, "xpReward": 30 },
+      { "id": "wp6", "difficulty": "medium", "question": "A rectangle has a length of 8 cm and a width of 5 cm. What is its area?", "options": ["26 cm²", "40 cm²", "13 cm²", "20 cm²"], "correctIndex": 1, "hint": "Area = length × width", "creditReward": 8, "xpReward": 30 },
+      { "id": "wp7", "difficulty": "hard", "question": "If 5 workers can build a wall in 10 days, how many days would 2 workers take?", "options": ["4", "25", "20", "15"], "correctIndex": 1, "hint": "This is an inverse proportion problem", "creditReward": 10, "xpReward": 35 },
+      { "id": "wp8", "difficulty": "hard", "question": "A store offers 20% off on a $50 item. What is the sale price?", "options": ["$30", "$40", "$35", "$45"], "correctIndex": 1, "hint": "Calculate 20% of $50, then subtract", "creditReward": 10, "xpReward": 35 },
+      { "id": "wp9", "difficulty": "hard", "question": "The average of three numbers is 15. Two numbers are 12 and 18. What is the third number?", "options": ["15", "16", "14", "17"], "correctIndex": 0, "hint": "Average × 3 = sum, then subtract known numbers", "creditReward": 10, "xpReward": 35 },
+      { "id": "wp10", "difficulty": "medium", "question": "A baker bakes 24 cookies and puts them into boxes of 6. How many boxes does she need?", "options": ["3", "4", "5", "6"], "correctIndex": 1, "hint": "Divide total cookies by cookies per box", "creditReward": 8, "xpReward": 30 }
+    ]
+  },
+  "bossBattle": {
+    "questions": [
+      { "id": "bb1", "subject": "math", "difficulty": "hard", "question": "What is 15 × 13?", "options": ["185", "195", "205", "175"], "correctIndex": 1, "hint": "15 × 10 + 15 × 3 = 150 + 45" },
+      { "id": "bb2", "subject": "math", "difficulty": "hard", "question": "What is 144 ÷ 12?", "options": ["10", "11", "12", "13"], "correctIndex": 2, "hint": "12 × 12 = 144" },
+      { "id": "bb3", "subject": "math", "difficulty": "hard", "question": "What is 25% of 240?", "options": ["50", "60", "70", "80"], "correctIndex": 1, "hint": "25% is one quarter, so 240 ÷ 4" },
+      { "id": "bb4", "subject": "calculus", "difficulty": "hard", "question": "What is the derivative of 3x⁴ + 2x²?", "options": ["12x³ + 4x", "7x³ + 4x", "12x³ + 2x", "3x³ + 2x"], "correctIndex": 0, "hint": "Apply power rule to each term" },
+      { "id": "bb5", "subject": "calculus", "difficulty": "hard", "question": "What is ∫ (6x²) dx?", "options": ["2x³ + C", "12x + C", "6x³ + C", "3x² + C"], "correctIndex": 0, "hint": "Power rule for integration: add 1 to exponent, divide by new exponent" },
+      { "id": "bb6", "subject": "calculus", "difficulty": "hard", "question": "What is the derivative of cos(x)?", "options": ["sin(x)", "-sin(x)", "cos(x)", "-cos(x)"], "correctIndex": 1, "hint": "Memorize the trig derivative table" },
+      { "id": "bb7", "subject": "python", "difficulty": "hard", "question": "What does len({'a':1, 'b':2, 'c':3}) return?", "options": ["3", "6", "2", "Error"], "correctIndex": 0, "hint": "len() returns the number of keys in a dictionary" },
+      { "id": "bb8", "subject": "python", "difficulty": "hard", "question": "What does [x*2 for x in range(4)] produce?", "options": ["[0, 2, 4, 6]", "[2, 4, 6, 8]", "[0, 2, 4]", "[1, 2, 3, 4]"], "correctIndex": 0, "hint": "List comprehension: each x from 0 to 3 gets doubled" },
+      { "id": "bb9", "subject": "math", "difficulty": "hard", "question": "What is the square root of 196?", "options": ["13", "14", "15", "16"], "correctIndex": 1, "hint": "14 × 14 = 196" },
+      { "id": "bb10", "subject": "python", "difficulty": "hard", "question": "What does ' '.join(['hello', 'world']) return?", "options": ["'hello world'", "'helloworld'", "'hello_world'", "Error"], "correctIndex": 0, "hint": "join() combines strings with the separator" },
+      { "id": "bb11", "subject": "math", "difficulty": "hard", "question": "What is 2¹⁰?", "options": ["512", "1024", "2048", "256"], "correctIndex": 1, "hint": "2 × 2 × 2 ... ten times" },
+      { "id": "bb12", "subject": "calculus", "difficulty": "hard", "question": "What is the limit of 3x as x approaches 5?", "options": ["10", "15", "20", "8"], "correctIndex": 1, "hint": "Just substitute x=5 into 3x" }
     ]
   }
 }

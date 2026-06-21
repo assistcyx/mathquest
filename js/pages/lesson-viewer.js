@@ -1,6 +1,7 @@
 const LessonViewer = {
   _calculusData: null,
   _pythonData: null,
+  _algebraData: null,
 
   async render(container, params) {
     const { subject, id } = params;
@@ -20,8 +21,12 @@ const LessonViewer = {
       try { this._pythonData = await fetch('data/lessons-python.json').then(r => r.json()); }
       catch (e) { container.innerHTML = '<div class="empty-state">Failed to load lessons</div>'; return; }
     }
+    if (subject === 'algebra' && !this._algebraData) {
+      try { this._algebraData = await fetch('data/lessons-algebra.json').then(r => r.json()); }
+      catch (e) { container.innerHTML = '<div class="empty-state">Failed to load lessons</div>'; return; }
+    }
 
-    const data = subject === 'calculus' ? this._calculusData : this._pythonData;
+    const data = subject === 'calculus' ? this._calculusData : subject === 'python' ? this._pythonData : this._algebraData;
     const lesson = data?.lessons?.find(l => l.id === parseInt(id));
     if (!lesson) {
       container.innerHTML = `<div class="empty-state"><div class="icon">📖</div><h3>Lesson not found</h3></div>`;
@@ -31,6 +36,8 @@ const LessonViewer = {
     const completed = GameState.get(`progress.${subject}.completed`) || [];
     const isCompleted = completed.includes(lesson.id);
     const isPink = subject === 'calculus';
+    const isAlgebra = subject === 'algebra';
+    const accent = isPink ? 'var(--color-primary)' : subject === 'python' ? 'var(--color-success)' : 'var(--color-algebra)';
     const allLessons = data.lessons || [];
     const currentIndex = allLessons.findIndex(l => l.id === lesson.id);
 
@@ -39,12 +46,12 @@ const LessonViewer = {
         <div class="two-col">
           <!-- Sidebar -->
           <div class="lesson-sidebar">
-            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-md); color: ${isPink ? 'var(--color-primary)' : 'var(--color-success)'};">
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-md); color: ${accent};">
               ${data.icon || ''} ${data.title || subject}
             </h3>
             <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
               ${allLessons.map((l, i) => `
-                <button class="btn btn-sm ${l.id === lesson.id ? (isPink ? 'btn-primary' : 'btn-success') : completed.includes(l.id) ? 'btn-ghost' : 'btn-secondary'}"
+                <button class="btn btn-sm ${l.id === lesson.id ? (isAlgebra ? 'btn-warning' : isPink ? 'btn-primary' : 'btn-success') : completed.includes(l.id) ? 'btn-ghost' : 'btn-secondary'}"
                   onclick="LessonViewer._navigate('${subject}', ${l.id})"
                   style="text-align: left; justify-content: flex-start;">
                   ${completed.includes(l.id) ? '✅' : l.id === lesson.id ? '📖' : '📄'} ${l.title}
@@ -58,7 +65,7 @@ const LessonViewer = {
             <div class="card">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
                 <div>
-                  <span class="badge ${isPink ? 'badge-pink' : 'badge-green'}">${lesson.difficulty || 'beginner'}</span>
+                  <span class="badge ${isAlgebra ? 'badge-gold' : isPink ? 'badge-pink' : 'badge-green'}">${lesson.difficulty || 'beginner'}</span>
                   <span class="badge badge-gold" style="margin-left: var(--space-xs);">+${lesson.creditReward || 10} credits</span>
                 </div>
                 <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Lesson ${currentIndex + 1} of ${allLessons.length}</span>
@@ -91,6 +98,16 @@ const LessonViewer = {
         </div>
       </div>
     `;
+
+    // Set AI tutor context
+    if (typeof AiTutor !== 'undefined') {
+      AiTutor._setContext({
+        currentPage: 'lesson',
+        subject: subject,
+        lessonTitle: lesson.title,
+        lessonId: lesson.id
+      });
+    }
   },
 
   _renderSection(section) {
@@ -200,6 +217,10 @@ const LessonViewer = {
     const completed = GameState.completeLesson(subject, lessonId);
     if (completed) {
       Toast.show(`🎉 Lesson complete! +10 credits, +50 XP`, 'success');
+      // Update adaptive mastery
+      if (typeof AdaptiveEngine !== 'undefined') {
+        AdaptiveEngine.updateMasteryFromLesson(subject, lessonId);
+      }
       AchievementEngine.check();
     }
     // Re-render to show completed state

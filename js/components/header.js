@@ -27,6 +27,7 @@ const Header = {
     const links = [
       { href: '#/lessons', text: '📚 Lessons' },
       { href: '#/games', text: '🎮 Games' },
+      { href: '#/ai-tutor', text: '🤖 AI Tutor' },
       { href: '#/partner', text: '🌟 Partner' },
       { href: '#/shop', text: '🛍️ Shop' }
     ];

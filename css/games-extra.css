@@ -1,0 +1,281 @@
+/* ===== Boss Battle ===== */
+.boss-hp-bar {
+  width: 100%;
+  height: 24px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 2px solid var(--color-error-dark);
+}
+
+.boss-hp-fill {
+  height: 100%;
+  transition: width 0.5s ease, background 0.5s ease;
+  border-radius: var(--radius-full);
+}
+
+/* ===== Speed Math ===== */
+.speedmath-question {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--gradient-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+}
+
+/* ===== Word Problems ===== */
+.word-problem-text {
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  text-align: left;
+  padding: var(--space-lg);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-accent);
+  margin-bottom: var(--space-xl);
+}
+
+/* ===== AI Tutor ===== */
+.ai-tutor-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.ai-tutor-header {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--gradient-purple);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 700;
+}
+
+.ai-tutor-header .ai-subtitle {
+  font-size: var(--text-xs);
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.ai-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ai-message {
+  max-width: 80%;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+  white-space: pre-wrap;
+}
+
+.ai-message-user {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: white;
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.ai-message-assistant {
+  align-self: flex-start;
+  background: var(--color-secondary-light);
+  color: var(--color-text);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.ai-message-system {
+  align-self: center;
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-full);
+  max-width: 90%;
+  text-align: center;
+}
+
+.ai-chat-input-area {
+  padding: var(--space-md);
+  border-top: 2px solid var(--color-border);
+  display: flex;
+  gap: var(--space-sm);
+  background: var(--color-bg-card);
+}
+
+.ai-chat-input {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+}
+
+.ai-chat-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.ai-chat-send {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-pink);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.ai-chat-send:hover {
+  transform: scale(1.1);
+}
+
+.ai-chat-send:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+.ai-loading {
+  display: flex;
+  gap: 4px;
+  padding: var(--space-md) var(--space-lg);
+  align-self: flex-start;
+  background: var(--color-secondary-light);
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.ai-loading span {
+  width: 8px;
+  height: 8px;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  animation: aiBounce 1.4s ease infinite both;
+}
+
+.ai-loading span:nth-child(1) { animation-delay: 0s; }
+.ai-loading span:nth-child(2) { animation-delay: 0.2s; }
+.ai-loading span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes aiBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* AI Tutor Setup */
+.ai-setup {
+  max-width: 500px;
+  margin: var(--space-2xl) auto;
+  text-align: center;
+}
+
+.ai-setup .ai-setup-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-card);
+}
+
+.ai-setup h2 {
+  margin-bottom: var(--space-md);
+}
+
+.ai-setup p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.ai-setup .input {
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+
+.ai-setup .ai-info {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-secondary-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Context indicator */
+.ai-context-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Floating AI button */
+.ai-float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-purple);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+  transition: transform var(--transition-fast);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-float-button:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .ai-tutor-container {
+    height: 85vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .ai-message {
+    max-width: 90%;
+  }
+
+  .speedmath-question {
+    font-size: 1.8rem;
+  }
+}

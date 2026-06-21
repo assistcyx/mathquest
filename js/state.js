@@ -3,7 +3,7 @@ const GameState = {
   _listeners: {},
   _saveTimer: null,
   STORAGE_KEY: 'mathquest_save',
-  VERSION: 1,
+  VERSION: 2,
 
   _defaults() {
     return {
@@ -16,7 +16,8 @@ const GameState = {
       },
       progress: {
         calculus: { completed: [], quizScores: {} },
-        python: { completed: [], challengeScores: {} }
+        python: { completed: [], challengeScores: {} },
+        algebra: { completed: [], quizScores: {} }
       },
       partner: {
         outfit: 'default',
@@ -31,15 +32,25 @@ const GameState = {
       },
       settings: {
         soundEnabled: true,
-        musicEnabled: false
+        musicEnabled: false,
+        aiApiKey: '',
+        aiTutorEnabled: false,
+        adaptiveLearning: true
       },
       gameStats: {
         quizzesPlayed: 0,
         challengesSolved: 0,
         matchesCompleted: 0,
+        speedMathPlayed: 0,
+        wordProblemsPlayed: 0,
+        bossBattlesFought: 0,
+        bossBattlesWon: 0,
         totalCorrect: 0,
-        totalGames: 0
-      }
+        totalGames: 0,
+        totalHintsUsed: 0
+      },
+      mastery: {},
+      _aiQuestionsAsked: 0
     };
   },
 
@@ -242,13 +253,19 @@ const GameState = {
     }
   },
 
-  addGameStats(type, correct, total) {
+  addGameStats(type, correct, total, won) {
     const stats = this.get('gameStats');
     stats.totalGames = (stats.totalGames || 0) + 1;
     stats.totalCorrect = (stats.totalCorrect || 0) + correct;
     if (type === 'quiz') stats.quizzesPlayed = (stats.quizzesPlayed || 0) + 1;
     if (type === 'challenge') stats.challengesSolved = (stats.challengesSolved || 0) + 1;
     if (type === 'match') stats.matchesCompleted = (stats.matchesCompleted || 0) + 1;
+    if (type === 'speedmath') stats.speedMathPlayed = (stats.speedMathPlayed || 0) + 1;
+    if (type === 'wordproblems') stats.wordProblemsPlayed = (stats.wordProblemsPlayed || 0) + 1;
+    if (type === 'bossbattle') {
+      stats.bossBattlesFought = (stats.bossBattlesFought || 0) + 1;
+      if (won) stats.bossBattlesWon = (stats.bossBattlesWon || 0) + 1;
+    }
     this.set('gameStats', stats);
   },
 

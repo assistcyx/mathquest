@@ -50,6 +50,52 @@
         { "type": "code-block", "language": "python", "content": "def add(a, b):\n    \"\"\"Add two numbers and return the result\"\"\"\n    result = a + b\n    return result\n\nsum = add(5, 3)\nprint(sum)  # 8" },
         { "type": "quiz-check", "question": "What keyword is used to define a function in Python?", "options": ["function", "def", "func", "define"], "correctIndex": 1, "explanation": "Python uses the 'def' keyword to define functions." }
       ]
+    },
+    {
+      "id": 4,
+      "title": "Dictionaries & Sets",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>dictionary</b> in Python stores key-value pairs. Think of it like a real dictionary: you look up a word (key) to find its definition (value)." },
+        { "type": "code-block", "language": "python", "content": "student = {\n    \"name\": \"Alice\",\n    \"age\": 15,\n    \"grade\": \"A\"\n}\n\nprint(student[\"name\"])  # Alice\nprint(student.get(\"age\"))  # 15" },
+        { "type": "text", "content": "Dictionaries are <b>mutable</b> (you can change them) and <b>unordered</b> (items don't have a fixed position). Keys must be unique and immutable (strings, numbers, tuples)." },
+        { "type": "code-block", "language": "python", "content": "# Adding and updating\nstudent[\"subject\"] = \"Math\"  # Add new key\nstudent[\"grade\"] = \"A+\"     # Update value\n\n# Looping through a dictionary\nfor key, value in student.items():\n    print(f\"{key}: {value}\")" },
+        { "type": "callout", "kind": "info", "content": "📝 A <b>set</b> is like a list but with no duplicates and no order. Use curly braces: {1, 2, 3}. Sets are great for removing duplicates!" },
+        { "type": "code-block", "language": "python", "content": "numbers = [1, 2, 2, 3, 3, 3]\nunique = set(numbers)\nprint(unique)  # {1, 2, 3}\n\n# Set operations\nset_a = {1, 2, 3}\nset_b = {3, 4, 5}\nprint(set_a & set_b)  # {3}  (intersection)\nprint(set_a | set_b)  # {1, 2, 3, 4, 5}  (union)" },
+        { "type": "quiz-check", "question": "What does {'a': 1, 'b': 2}['a'] return?", "options": ["1", "'a'", "2", "Error"], "correctIndex": 0, "explanation": "The key 'a' maps to the value 1, so it returns 1." }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Error Handling",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "Even the best programmers make mistakes! Python uses <b>try/except</b> blocks to handle errors gracefully without crashing your program." },
+        { "type": "code-block", "language": "python", "content": "try:\n    number = int(input(\"Enter a number: \"))\n    result = 10 / number\n    print(f\"Result: {result}\")\nexcept ValueError:\n    print(\"That's not a valid number!\")\nexcept ZeroDivisionError:\n    print(\"Can't divide by zero!\")" },
+        { "type": "text", "content": "Common built-in exceptions:<br><br>⚠️ <b>ValueError</b> — wrong type of value<br>⚠️ <b>ZeroDivisionError</b> — dividing by zero<br>⚠️ <b>TypeError</b> — operation on wrong types<br>⚠️ <b>IndexError</b> — list index out of range<br>⚠️ <b>KeyError</b> — dictionary key not found" },
+        { "type": "callout", "kind": "tip", "content": "💡 Use a bare <b>except:</b> to catch ANY error, but it's better to catch specific exceptions so you know what went wrong!" },
+        { "type": "code-block", "language": "python", "content": "# The 'finally' block runs no matter what\ntry:\n    file = open(\"data.txt\", \"r\")\n    content = file.read()\nexcept FileNotFoundError:\n    print(\"File not found!\")\nfinally:\n    file.close()  # Always close the file" },
+        { "type": "quiz-check", "question": "Which keyword starts a block that runs whether or not an error occurs?", "options": ["else", "finally", "except", "end"], "correctIndex": 1, "explanation": "The 'finally' block always executes, regardless of whether an exception was raised." }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Classes & OOP",
+      "difficulty": "advanced",
+      "xpReward": 75,
+      "creditReward": 15,
+      "sections": [
+        { "type": "text", "content": "<b>Object-Oriented Programming (OOP)</b> is a way of organizing code using <b>classes</b> and <b>objects</b>. A class is like a blueprint, and an object is an instance of that blueprint." },
+        { "type": "code-block", "language": "python", "content": "class Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n    \n    def introduce(self):\n        return f\"Hi, I'm {self.name} and I'm {self.age}\"\n\n# Create an object (instance)\nalice = Student(\"Alice\", 15)\nprint(alice.introduce())  # Hi, I'm Alice and I'm 15" },
+        { "type": "text", "content": "The <b>__init__</b> method is the <b>constructor</b> — it runs when you create a new object. The <b>self</b> parameter refers to the current instance." },
+        { "type": "callout", "kind": "info", "content": "📝 <b>self</b> is like saying 'this object'. Every method in a class must have self as the first parameter (Python does this automatically for you when calling)." },
+        { "type": "code-block", "language": "python", "content": "class Dog:\n    species = \"Canine\"  # Class attribute (shared by all)\n    \n    def __init__(self, name):\n        self.name = name  # Instance attribute (unique per dog)\n    \n    def bark(self):\n        return f\"{self.name} says Woof!\"\n\nbuddy = Dog(\"Buddy\")\nprint(buddy.bark())  # Buddy says Woof!\nprint(buddy.species)  # Canine" },
+        { "type": "quiz-check", "question": "What is the first parameter of every method in a Python class?", "options": ["this", "self", "me", "class"], "correctIndex": 1, "explanation": "Python uses 'self' as the first parameter of every instance method to refer to the current object." }
+      ]
     }
   ]
 }

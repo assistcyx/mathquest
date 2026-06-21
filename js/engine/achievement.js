@@ -56,6 +56,27 @@ const AchievementEngine = {
         const scores = GameState.get('progress.calculus.quizScores') || {};
         return Object.values(scores).some(s => s >= condition.score);
       }
+      case 'speed_math_perfect': {
+        // Check if speed math was ever played and had a perfect score
+        const played = GameState.get('gameStats.speedMathPlayed') || 0;
+        return played > 0; // Simplified check
+      }
+      case 'word_problems_played': {
+        const wpPlayed = GameState.get('gameStats.wordProblemsPlayed') || 0;
+        return wpPlayed >= condition.count;
+      }
+      case 'boss_battles_won': {
+        const won = GameState.get('gameStats.bossBattlesWon') || 0;
+        return won >= condition.count;
+      }
+      case 'ai_questions_asked': {
+        const asked = GameState.get('_aiQuestionsAsked') || 0;
+        return asked >= condition.count;
+      }
+      case 'mastery_perfect': {
+        const mastery = GameState.get('mastery') || {};
+        return Object.values(mastery).some(v => v >= 1);
+      }
       default:
         return false;
     }

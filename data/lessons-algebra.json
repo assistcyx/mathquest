@@ -1,0 +1,56 @@
+{
+  "subject": "algebra",
+  "title": "Algebra",
+  "icon": "x+y",
+  "color": "#FBBF24",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Linear Equations",
+      "difficulty": "beginner",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>linear equation</b> is an equation that forms a straight line when graphed. It has one or two variables, and each variable is raised to the power of 1 (no squares or cubes!)." },
+        { "type": "text", "content": "The standard form of a linear equation in one variable is:<br><br><b>ax + b = 0</b><br><br>where a and b are constants, and x is the variable we want to solve for." },
+        { "type": "math", "content": "2x + 3 = 7 → 2x = 4 → x = 2" },
+        { "type": "callout", "kind": "tip", "content": "💡 To solve a linear equation, your goal is to <b>isolate the variable</b> — get it alone on one side of the equals sign!" },
+        { "type": "text", "content": "Here's the step-by-step process:<br><br>1. <b>Simplify</b> both sides (combine like terms)<br>2. <b>Move</b> variable terms to one side, constants to the other<br>3. <b>Divide</b> both sides by the coefficient of the variable" },
+        { "type": "code-block", "language": "python", "content": "# Solving 3x + 7 = 22\n# Step 1: Subtract 7 from both sides\n# 3x = 15\n# Step 2: Divide both sides by 3\n# x = 5\n\nprint(f\"x = {5}\")  # x = 5" },
+        { "type": "quiz-check", "question": "What is the solution to 4x - 8 = 16?", "options": ["x = 4", "x = 6", "x = 8", "x = 2"], "correctIndex": 1, "explanation": "Add 8 to both sides: 4x = 24. Divide by 4: x = 6." }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Quadratics",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>quadratic equation</b> is an equation where the highest power of the variable is 2. The general form is:<br><br><b>ax² + bx + c = 0</b><br><br>where a, b, and c are constants, and a ≠ 0." },
+        { "type": "math", "content": "x² - 5x + 6 = 0" },
+        { "type": "text", "content": "There are three main ways to solve quadratic equations:<br><br>1. <b>Factoring</b> — breaking it into simpler expressions<br>2. <b>Quadratic Formula</b> — a formula that always works<br>3. <b>Completing the Square</b> — rewriting in vertex form" },
+        { "type": "callout", "kind": "info", "content": "📝 The <b>Quadratic Formula</b> is: x = (-b ± √(b² - 4ac)) / 2a<br><br>It works for EVERY quadratic equation!" },
+        { "type": "text", "content": "Let's factor x² - 5x + 6 = 0:<br><br>We need two numbers that multiply to 6 and add to -5.<br>Those numbers are -2 and -3.<br><br>(x - 2)(x - 3) = 0<br><br>So x = 2 or x = 3." },
+        { "type": "math", "content": "x² - 5x + 6 = (x-2)(x-3) = 0 → x = 2, x = 3" },
+        { "type": "quiz-check", "question": "What are the solutions to x² - 4 = 0?", "options": ["x = 2 only", "x = 2 and x = -2", "x = 4", "x = 2 and x = 4"], "correctIndex": 1, "explanation": "Factor as (x-2)(x+2) = 0, so x = 2 or x = -2." }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Systems of Equations",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>system of equations</b> is a set of two or more equations with the same variables. The solution is the point(s) where all equations are satisfied simultaneously." },
+        { "type": "math", "content": "2x + y = 10\nx - y = 2" },
+        { "type": "text", "content": "There are three methods to solve systems:<br><br>1. <b>Substitution</b> — solve one equation for a variable, plug into the other<br>2. <b>Elimination</b> — add or subtract equations to eliminate a variable<br>3. <b>Graphing</b> — graph both lines, find the intersection" },
+        { "type": "callout", "kind": "tip", "content": "💡 <b>Substitution</b> is great when one equation is already solved for a variable. <b>Elimination</b> is best when coefficients line up nicely!" },
+        { "type": "text", "content": "Let's solve using <b>elimination</b>:<br><br>2x + y = 10<br>x - y = 2<br><br>Add the equations: 3x = 12 → x = 4<br>Plug back: 4 - y = 2 → y = 2<br><br>Solution: (4, 2)" },
+        { "type": "math", "content": "2x + y = 10\nx - y = 2\n---------\n3x = 12 → x = 4 → y = 2" },
+        { "type": "quiz-check", "question": "Solve the system: x + y = 7 and x - y = 1", "options": ["(4, 3)", "(3, 4)", "(5, 2)", "(4, 2)"], "correctIndex": 0, "explanation": "Add equations: 2x = 8 → x = 4. Then 4 + y = 7 → y = 3. Solution: (4, 3)." }
+      ]
+    }
+  ]
+}

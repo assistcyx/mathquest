@@ -6,7 +6,13 @@ const CreditEngine = {
     matchComplete: { credits: 12, xp: 40 },
     achievement: { credits: 20, xp: 50 },
     dailyLogin: { credits: 15, xp: 30 },
-    streakBonus: { credits: 10, xp: 20 }
+    streakBonus: { credits: 10, xp: 20 },
+    speedMathCorrect: { credits: 3, xp: 15 },
+    speedMathSpeedBonus: { credits: 2, xp: 10 },
+    wordProblemCorrect: { credits: 6, xp: 25 },
+    bossBattlePhase: { credits: 15, xp: 50 },
+    bossBattleWin: { credits: 50, xp: 150 },
+    bossBattleParticipation: { credits: 10, xp: 30 }
   },
 
   awardCredits(amount, reason) {

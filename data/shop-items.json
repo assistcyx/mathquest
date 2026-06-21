@@ -4,15 +4,21 @@
   { "id": "outfit_sporty", "type": "outfit", "name": "Sporty Look", "description": "Ready for action!", "price": 100, "rarity": "rare" },
   { "id": "outfit_formal", "type": "outfit", "name": "Formal Wear", "description": "Smart and sophisticated", "price": 150, "rarity": "rare" },
   { "id": "outfit_cozy", "type": "outfit", "name": "Cozy Sweater", "description": "Warm and comfy", "price": 80, "rarity": "common" },
+  { "id": "outfit_ai", "type": "outfit", "name": "Neural Network Hoodie", "description": "Purple circuit-board aesthetic", "price": 150, "rarity": "rare" },
+  { "id": "outfit_boss", "type": "outfit", "name": "Boss Slayer Armor", "description": "Dark metallic armor from victory", "price": 250, "rarity": "epic" },
   { "id": "acc_cat_ears", "type": "accessory", "name": "Cat Ears", "description": "Nyaa~", "price": 30, "rarity": "common" },
   { "id": "acc_bow", "type": "accessory", "name": "Cute Bow", "description": "Adds extra cuteness", "price": 40, "rarity": "common" },
   { "id": "acc_glasses", "type": "accessory", "name": "Smart Glasses", "description": "Look studious!", "price": 60, "rarity": "common" },
   { "id": "acc_crown", "type": "accessory", "name": "Little Crown", "description": "You're royalty!", "price": 120, "rarity": "epic" },
   { "id": "acc_ribbon", "type": "accessory", "name": "Hair Ribbon", "description": "A sweet accessory", "price": 25, "rarity": "common" },
   { "id": "acc_star_headband", "type": "accessory", "name": "Star Headband", "description": "Reach for the stars!", "price": 55, "rarity": "rare" },
+  { "id": "acc_ai_halo", "type": "accessory", "name": "AI Halo", "description": "A floating digital halo", "price": 180, "rarity": "epic" },
+  { "id": "acc_boss_crown", "type": "accessory", "name": "Dragon Crown", "description": "Crown of the boss conqueror", "price": 100, "rarity": "rare" },
   { "id": "bg_starry", "type": "background", "name": "Starry Night", "description": "A beautiful starry sky", "price": 75, "rarity": "rare" },
   { "id": "bg_beach", "type": "background", "name": "Sunny Beach", "description": "Relax by the shore", "price": 100, "rarity": "rare" },
   { "id": "bg_library", "type": "background", "name": "Cozy Library", "description": "Perfect for studying", "price": 60, "rarity": "common" },
   { "id": "bg_magical", "type": "background", "name": "Magical Realm", "description": "A world of wonder", "price": 180, "rarity": "epic" },
-  { "id": "bg_garden", "type": "background", "name": "Flower Garden", "description": "Bloom with knowledge", "price": 90, "rarity": "common" }
+  { "id": "bg_garden", "type": "background", "name": "Flower Garden", "description": "Bloom with knowledge", "price": 90, "rarity": "common" },
+  { "id": "bg_coding", "type": "background", "name": "Cyber Dojo", "description": "Dark grid aesthetic", "price": 120, "rarity": "rare" },
+  { "id": "bg_boss_arena", "type": "background", "name": "Boss Arena", "description": "Fiery battleground", "price": 200, "rarity": "epic" }
 ]

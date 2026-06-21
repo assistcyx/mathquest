@@ -78,6 +78,11 @@
   --gradient-warm: linear-gradient(135deg, #FF9A9E, #FAD0C4);
   --gradient-header: linear-gradient(135deg, #FFF5F9, #FDF2F8);
 
+  /* Subject accent colors */
+  --color-algebra: #FBBF24;
+  --color-algebra-dark: #F59E0B;
+  --color-algebra-light: #FEF3C7;
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
