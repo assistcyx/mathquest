@@ -17,7 +17,8 @@ const GameState = {
       progress: {
         calculus: { completed: [], quizScores: {} },
         python: { completed: [], challengeScores: {} },
-        algebra: { completed: [], quizScores: {} }
+        algebra: { completed: [], quizScores: {} },
+        trigonometry: { completed: [], quizScores: {} }
       },
       partner: {
         outfit: 'default',
@@ -34,6 +35,9 @@ const GameState = {
         soundEnabled: true,
         musicEnabled: false,
         aiApiKey: '',
+        aiProvider: 'claude',
+        aiApiKeyDeepseek: '',
+        aiApiKeyOpenai: '',
         aiTutorEnabled: false,
         adaptiveLearning: true
       },

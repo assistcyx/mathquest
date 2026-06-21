@@ -2,6 +2,7 @@ const LessonViewer = {
   _calculusData: null,
   _pythonData: null,
   _algebraData: null,
+  _trigData: null,
 
   async render(container, params) {
     const { subject, id } = params;
@@ -25,8 +26,12 @@ const LessonViewer = {
       try { this._algebraData = await fetch('data/lessons-algebra.json').then(r => r.json()); }
       catch (e) { container.innerHTML = '<div class="empty-state">Failed to load lessons</div>'; return; }
     }
+    if (subject === 'trigonometry' && !this._trigData) {
+      try { this._trigData = await fetch('data/lessons-trigonometry.json').then(r => r.json()); }
+      catch (e) { container.innerHTML = '<div class="empty-state">Failed to load lessons</div>'; return; }
+    }
 
-    const data = subject === 'calculus' ? this._calculusData : subject === 'python' ? this._pythonData : this._algebraData;
+    const data = subject === 'calculus' ? this._calculusData : subject === 'python' ? this._pythonData : subject === 'algebra' ? this._algebraData : this._trigData;
     const lesson = data?.lessons?.find(l => l.id === parseInt(id));
     if (!lesson) {
       container.innerHTML = `<div class="empty-state"><div class="icon">📖</div><h3>Lesson not found</h3></div>`;
@@ -37,7 +42,8 @@ const LessonViewer = {
     const isCompleted = completed.includes(lesson.id);
     const isPink = subject === 'calculus';
     const isAlgebra = subject === 'algebra';
-    const accent = isPink ? 'var(--color-primary)' : subject === 'python' ? 'var(--color-success)' : 'var(--color-algebra)';
+    const isTrig = subject === 'trigonometry';
+    const accent = isPink ? 'var(--color-primary)' : subject === 'python' ? 'var(--color-success)' : isAlgebra ? 'var(--color-algebra)' : 'var(--color-accent)';
     const allLessons = data.lessons || [];
     const currentIndex = allLessons.findIndex(l => l.id === lesson.id);
 
@@ -51,7 +57,7 @@ const LessonViewer = {
             </h3>
             <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
               ${allLessons.map((l, i) => `
-                <button class="btn btn-sm ${l.id === lesson.id ? (isAlgebra ? 'btn-warning' : isPink ? 'btn-primary' : 'btn-success') : completed.includes(l.id) ? 'btn-ghost' : 'btn-secondary'}"
+                <button class="btn btn-sm ${l.id === lesson.id ? (isAlgebra ? 'btn-warning' : isTrig ? 'btn-purple' : isPink ? 'btn-primary' : 'btn-success') : completed.includes(l.id) ? 'btn-ghost' : 'btn-secondary'}"
                   onclick="LessonViewer._navigate('${subject}', ${l.id})"
                   style="text-align: left; justify-content: flex-start;">
                   ${completed.includes(l.id) ? '✅' : l.id === lesson.id ? '📖' : '📄'} ${l.title}
@@ -65,7 +71,7 @@ const LessonViewer = {
             <div class="card">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
                 <div>
-                  <span class="badge ${isAlgebra ? 'badge-gold' : isPink ? 'badge-pink' : 'badge-green'}">${lesson.difficulty || 'beginner'}</span>
+                  <span class="badge ${isAlgebra ? 'badge-gold' : isTrig ? 'badge-purple' : isPink ? 'badge-pink' : 'badge-green'}">${lesson.difficulty || 'beginner'}</span>
                   <span class="badge badge-gold" style="margin-left: var(--space-xs);">+${lesson.creditReward || 10} credits</span>
                 </div>
                 <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Lesson ${currentIndex + 1} of ${allLessons.length}</span>

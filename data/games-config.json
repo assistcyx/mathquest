@@ -24,7 +24,12 @@
       { "id": "q17", "subject": "calculus", "difficulty": "hard", "question": "What is ∫ sin(x) dx?", "options": ["-cos(x) + C", "cos(x) + C", "sin(x) + C", "-sin(x) + C"], "correctIndex": 0, "hint": "Derivative of cos is -sin, so derivative of -cos is sin" },
       { "id": "q18", "subject": "python", "difficulty": "hard", "question": "What does {1, 2, 3} & {3, 4, 5} return?", "options": ["{3}", "{1, 2, 3, 4, 5}", "{1, 2}", "Error"], "correctIndex": 0, "hint": "The & operator finds the intersection of two sets" },
       { "id": "q19", "subject": "calculus", "difficulty": "medium", "question": "What is the derivative of x⁴?", "options": ["4x³", "4x⁴", "x³", "3x⁴"], "correctIndex": 0, "hint": "Bring down the 4, reduce power by 1" },
-      { "id": "q20", "subject": "python", "difficulty": "medium", "question": "What does 'hello'.upper() return?", "options": ["'HELLO'", "'hello'", "'Hello'", "Error"], "correctIndex": 0, "hint": "The upper() method converts to uppercase" }
+      { "id": "q20", "subject": "python", "difficulty": "medium", "question": "What does 'hello'.upper() return?", "options": ["'HELLO'", "'hello'", "'Hello'", "Error"], "correctIndex": 0, "hint": "The upper() method converts to uppercase" },
+      { "id": "q21", "subject": "trigonometry", "difficulty": "easy", "question": "What is sin(30°)?", "options": ["1/2", "√3/2", "1", "0"], "correctIndex": 0, "hint": "SOH: sin = opposite/hypotenuse. In a 30-60-90 triangle, opposite = 1, hypotenuse = 2." },
+      { "id": "q22", "subject": "trigonometry", "difficulty": "easy", "question": "What is cos(0°)?", "options": ["1", "0", "-1", "Undefined"], "correctIndex": 0, "hint": "On the unit circle, at 0° the x-coordinate is 1." },
+      { "id": "q23", "subject": "trigonometry", "difficulty": "medium", "question": "What does SOH-CAH-TOA help you remember?", "options": ["Trig ratios", "Quadratic formula", "Derivative rules", "Integration rules"], "correctIndex": 0, "hint": "It's a mnemonic for sine, cosine, and tangent." },
+      { "id": "q24", "subject": "trigonometry", "difficulty": "medium", "question": "What is the Pythagorean identity?", "options": ["sin²θ + cos²θ = 1", "sin²θ + cos²θ = 0", "sinθ + cosθ = 1", "sin²θ - cos²θ = 1"], "correctIndex": 0, "hint": "From the unit circle: x² + y² = 1, where x = cosθ and y = sinθ." },
+      { "id": "q25", "subject": "trigonometry", "difficulty": "hard", "question": "What is the period of y = tan(x)?", "options": ["π", "2π", "π/2", "3π/2"], "correctIndex": 0, "hint": "Tangent repeats every π radians, unlike sine/cosine which repeat every 2π." }
     ]
   },
   "codeChallenge": {
@@ -73,6 +78,22 @@
         ],
         "creditReward": 12,
         "xpReward": 40
+      },
+      {
+        "id": "ms3",
+        "title": "Trigonometry Terms",
+        "pairs": [
+          { "term": "Sine", "definition": "Ratio of opposite to hypotenuse" },
+          { "term": "Cosine", "definition": "Ratio of adjacent to hypotenuse" },
+          { "term": "Tangent", "definition": "Ratio of opposite to adjacent" },
+          { "term": "Unit Circle", "definition": "Circle of radius 1 centered at origin" },
+          { "term": "Period", "definition": "Length of one complete cycle" },
+          { "term": "Amplitude", "definition": "Height from midline to peak" },
+          { "term": "Pythagorean Identity", "definition": "sin²θ + cos²θ = 1" },
+          { "term": "Radian", "definition": "Angle measure based on circle radius" }
+        ],
+        "creditReward": 12,
+        "xpReward": 40
       }
     ]
   },
@@ -104,7 +125,9 @@
       { "id": "bb9", "subject": "math", "difficulty": "hard", "question": "What is the square root of 196?", "options": ["13", "14", "15", "16"], "correctIndex": 1, "hint": "14 × 14 = 196" },
       { "id": "bb10", "subject": "python", "difficulty": "hard", "question": "What does ' '.join(['hello', 'world']) return?", "options": ["'hello world'", "'helloworld'", "'hello_world'", "Error"], "correctIndex": 0, "hint": "join() combines strings with the separator" },
       { "id": "bb11", "subject": "math", "difficulty": "hard", "question": "What is 2¹⁰?", "options": ["512", "1024", "2048", "256"], "correctIndex": 1, "hint": "2 × 2 × 2 ... ten times" },
-      { "id": "bb12", "subject": "calculus", "difficulty": "hard", "question": "What is the limit of 3x as x approaches 5?", "options": ["10", "15", "20", "8"], "correctIndex": 1, "hint": "Just substitute x=5 into 3x" }
+      { "id": "bb12", "subject": "calculus", "difficulty": "hard", "question": "What is the limit of 3x as x approaches 5?", "options": ["10", "15", "20", "8"], "correctIndex": 1, "hint": "Just substitute x=5 into 3x" },
+      { "id": "bb13", "subject": "trigonometry", "difficulty": "hard", "question": "What is sin(π/2)?", "options": ["1", "0", "-1", "Undefined"], "correctIndex": 0, "hint": "At π/2 (90°) on the unit circle, the y-coordinate is 1." },
+      { "id": "bb14", "subject": "trigonometry", "difficulty": "hard", "question": "Simplify: sin²(θ) + cos²(θ)", "options": ["1", "0", "sin(2θ)", "tan(θ)"], "correctIndex": 0, "hint": "This is the fundamental Pythagorean identity." }
     ]
   }
 }

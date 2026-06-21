@@ -2,20 +2,23 @@ const LessonsHub = {
   _calculusData: null,
   _pythonData: null,
   _algebraData: null,
+  _trigData: null,
 
   async render(container, params) {
     container.innerHTML = `<div class="loading-spinner"></div>`;
 
     if (!this._calculusData) {
       try {
-        const [calc, py, alg] = await Promise.all([
+        const [calc, py, alg, trig] = await Promise.all([
           fetch('data/lessons-calculus.json').then(r => r.json()),
           fetch('data/lessons-python.json').then(r => r.json()),
-          fetch('data/lessons-algebra.json').then(r => r.json())
+          fetch('data/lessons-algebra.json').then(r => r.json()),
+          fetch('data/lessons-trigonometry.json').then(r => r.json())
         ]);
         this._calculusData = calc;
         this._pythonData = py;
         this._algebraData = alg;
+        this._trigData = trig;
       } catch (e) {
         container.innerHTML = `<div class="empty-state"><div class="icon">😅</div><h3>Couldn't load lessons</h3><p>Please check the data files.</p></div>`;
         return;
@@ -29,10 +32,11 @@ const LessonsHub = {
           <p>Choose your subject and start learning!</p>
         </div>
 
-        <div class="grid-3">
+        <div class="grid-2" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
           ${this._renderSubjectCard('calculus', this._calculusData)}
           ${this._renderSubjectCard('python', this._pythonData)}
           ${this._renderSubjectCard('algebra', this._algebraData)}
+          ${this._renderSubjectCard('trigonometry', this._trigData)}
         </div>
       </div>
     `;
@@ -47,10 +51,11 @@ const LessonsHub = {
     const config = {
       calculus: { cardClass: 'card-pink', btnClass: 'btn-primary', color: '#FF6B9D' },
       python: { cardClass: 'card-green', btnClass: 'btn-success', color: '#34D399' },
-      algebra: { cardClass: 'card-gold', btnClass: 'btn-warning', color: '#FBBF24' }
+      algebra: { cardClass: 'card-gold', btnClass: 'btn-warning', color: '#FBBF24' },
+      trigonometry: { cardClass: 'card-purple', btnClass: 'btn-purple', color: '#60A5FA' }
     };
     const cfg = config[subject] || { cardClass: '', btnClass: 'btn-primary', color: '#FF6B9D' };
-    const icon = data.icon || (subject === 'calculus' ? '∫' : subject === 'python' ? '🐍' : 'x+y');
+    const icon = data.icon || '📐';
     const title = data.title || subject.charAt(0).toUpperCase() + subject.slice(1);
 
     return `
@@ -60,8 +65,8 @@ const LessonsHub = {
         <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
           ${completed.length} / ${totalLessons} lessons completed
         </p>
-        <div class="progress-bar" style="margin-bottom: var(--space-md);${subject === 'algebra' ? ' --progress-color: var(--color-algebra);' : ''}">
-          <div class="progress-bar-fill" style="width: ${progress * 100}%${subject === 'algebra' ? '; background: var(--color-algebra);' : ''}"></div>
+        <div class="progress-bar" style="margin-bottom: var(--space-md);">
+          <div class="progress-bar-fill" style="width: ${progress * 100}%${subject === 'algebra' ? '; background: var(--color-algebra);' : subject === 'trigonometry' ? '; background: var(--color-accent);' : ''}"></div>
         </div>
         <button class="btn ${cfg.btnClass}">
           ${progress === 0 ? '▶ Start Learning' : progress >= 1 ? '✅ Completed!' : '▶ Continue'}
@@ -73,7 +78,8 @@ const LessonsHub = {
   _openSubject(subject) {
     const data = subject === 'calculus' ? this._calculusData
       : subject === 'python' ? this._pythonData
-      : this._algebraData;
+      : subject === 'algebra' ? this._algebraData
+      : this._trigData;
     if (!data || !data.lessons || data.lessons.length === 0) return;
 
     const completed = GameState.get(`progress.${subject}.completed`) || [];

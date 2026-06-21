@@ -14,7 +14,19 @@ const AdaptiveEngine = {
     'classes-oop': { subject: 'python', label: 'Classes & OOP', prerequisites: ['functions', 'error-handling'], difficultyOrder: ['hard'] },
     'linear-equations': { subject: 'algebra', label: 'Linear Equations', prerequisites: [], difficultyOrder: ['easy'] },
     'quadratics': { subject: 'algebra', label: 'Quadratics', prerequisites: ['linear-equations'], difficultyOrder: ['easy', 'medium'] },
-    'systems-equations': { subject: 'algebra', label: 'Systems of Equations', prerequisites: ['linear-equations'], difficultyOrder: ['medium', 'hard'] }
+    'systems-equations': { subject: 'algebra', label: 'Systems of Equations', prerequisites: ['linear-equations'], difficultyOrder: ['medium', 'hard'] },
+    'inequalities': { subject: 'algebra', label: 'Inequalities', prerequisites: ['linear-equations'], difficultyOrder: ['medium'] },
+    'functions-domain': { subject: 'algebra', label: 'Functions & Domain', prerequisites: ['linear-equations'], difficultyOrder: ['medium'] },
+    'polynomials-factoring': { subject: 'algebra', label: 'Polynomials & Factoring', prerequisites: ['quadratics'], difficultyOrder: ['advanced'] },
+    'lhopital': { subject: 'calculus', label: "L'Hôpital's Rule", prerequisites: ['derivatives', 'limits'], difficultyOrder: ['advanced'] },
+    'integration-substitution': { subject: 'calculus', label: 'Integration by Substitution', prerequisites: ['basic-integration', 'chain-rule'], difficultyOrder: ['advanced'] },
+    'definite-integrals': { subject: 'calculus', label: 'Definite Integrals & Area', prerequisites: ['basic-integration'], difficultyOrder: ['advanced'] },
+    'list-comprehensions': { subject: 'python', label: 'List Comprehensions', prerequisites: ['lists-loops'], difficultyOrder: ['medium'] },
+    'modules-packages': { subject: 'python', label: 'Modules & Packages', prerequisites: ['functions'], difficultyOrder: ['medium'] },
+    'file-io': { subject: 'python', label: 'File I/O & Context Managers', prerequisites: ['functions', 'error-handling'], difficultyOrder: ['advanced'] },
+    'trig-ratios': { subject: 'trigonometry', label: 'Introduction to Trig Ratios', prerequisites: [], difficultyOrder: ['easy'] },
+    'unit-circle': { subject: 'trigonometry', label: 'The Unit Circle', prerequisites: ['trig-ratios'], difficultyOrder: ['medium'] },
+    'trig-identities': { subject: 'trigonometry', label: 'Trig Identities & Graphs', prerequisites: ['unit-circle'], difficultyOrder: ['advanced'] }
   },
 
   // Topic-to-lesson mapping
@@ -25,15 +37,27 @@ const AdaptiveEngine = {
     'chain-rule': { subject: 'calculus', id: 4 },
     'product-quotient': { subject: 'calculus', id: 5 },
     'derivative-apps': { subject: 'calculus', id: 6 },
+    'lhopital': { subject: 'calculus', id: 7 },
+    'integration-substitution': { subject: 'calculus', id: 8 },
+    'definite-integrals': { subject: 'calculus', id: 9 },
     'variables': { subject: 'python', id: 1 },
     'lists-loops': { subject: 'python', id: 2 },
     'functions': { subject: 'python', id: 3 },
     'dicts-sets': { subject: 'python', id: 4 },
     'error-handling': { subject: 'python', id: 5 },
     'classes-oop': { subject: 'python', id: 6 },
+    'list-comprehensions': { subject: 'python', id: 7 },
+    'modules-packages': { subject: 'python', id: 8 },
+    'file-io': { subject: 'python', id: 9 },
     'linear-equations': { subject: 'algebra', id: 1 },
     'quadratics': { subject: 'algebra', id: 2 },
-    'systems-equations': { subject: 'algebra', id: 3 }
+    'systems-equations': { subject: 'algebra', id: 3 },
+    'inequalities': { subject: 'algebra', id: 4 },
+    'functions-domain': { subject: 'algebra', id: 5 },
+    'polynomials-factoring': { subject: 'algebra', id: 6 },
+    'trig-ratios': { subject: 'trigonometry', id: 1 },
+    'unit-circle': { subject: 'trigonometry', id: 2 },
+    'trig-identities': { subject: 'trigonometry', id: 3 }
   },
 
   // Get mastery for a topic (0.0 - 1.0)

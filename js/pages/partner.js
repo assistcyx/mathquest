@@ -138,6 +138,7 @@ const PartnerPage = {
     const completedCalc = (GameState.get('progress.calculus.completed') || []).length;
     const completedPy = (GameState.get('progress.python.completed') || []).length;
     const completedAlg = (GameState.get('progress.algebra.completed') || []).length;
+    const completedTrig = (GameState.get('progress.trigonometry.completed') || []).length;
     const quizzesPlayed = GameState.get('gameStats.quizzesPlayed') || 0;
     const matchesCompleted = GameState.get('gameStats.matchesCompleted') || 0;
     const speedMathPlayed = GameState.get('gameStats.speedMathPlayed') || 0;
@@ -160,6 +161,7 @@ const PartnerPage = {
             <div><strong>Calc Lessons:</strong> ${completedCalc}</div>
             <div><strong>Python Lessons:</strong> ${completedPy}</div>
             <div><strong>Algebra Lessons:</strong> ${completedAlg}</div>
+            <div><strong>Trig Lessons:</strong> ${completedTrig}</div>
             <div><strong>Quizzes Played:</strong> ${quizzesPlayed}</div>
             <div><strong>Speed Math:</strong> ${speedMathPlayed}</div>
             <div><strong>Word Problems:</strong> ${wpPlayed}</div>

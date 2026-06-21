@@ -51,6 +51,51 @@
         { "type": "math", "content": "2x + y = 10\nx - y = 2\n---------\n3x = 12 → x = 4 → y = 2" },
         { "type": "quiz-check", "question": "Solve the system: x + y = 7 and x - y = 1", "options": ["(4, 3)", "(3, 4)", "(5, 2)", "(4, 2)"], "correctIndex": 0, "explanation": "Add equations: 2x = 8 → x = 4. Then 4 + y = 7 → y = 3. Solution: (4, 3)." }
       ]
+    },
+    {
+      "id": 4,
+      "title": "Inequalities",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "An <b>inequality</b> is like an equation, but instead of = it uses <, >, ≤, or ≥. Solving inequalities is very similar to solving equations, with one important catch." },
+        { "type": "text", "content": "Rules for inequalities:<br><br>✅ You can add/subtract the same number from both sides<br>✅ You can multiply/divide by a <b>positive</b> number — inequality stays the same<br>⚠️ If you multiply/divide by a <b>negative</b> number, flip the inequality sign!" },
+        { "type": "callout", "kind": "tip", "content": "💡 Key rule: <b>Flip the sign when multiplying or dividing by a negative!</b> Example: -2x < 6 → x > -3" },
+        { "type": "math", "content": "Solve: -3x + 7 ≤ 16\n-3x ≤ 9\nx ≥ -3  (flipped because we divided by -3)" },
+        { "type": "text", "content": "On a number line:<br><br>• <b>Open circle</b> (◯) for < or ><br>• <b>Closed circle</b> (●) for ≤ or ≥<br>• Shade in the direction of the solutions" },
+        { "type": "quiz-check", "question": "Solve: -2x > 8", "options": ["x > -4", "x < -4", "x > 4", "x < 4"], "correctIndex": 1, "explanation": "Divide both sides by -2: x < -4. The sign flips because we divided by a negative." }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Functions & Domain",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>function</b> is a rule that assigns each input exactly one output. Think of it like a vending machine: you press a button (input), and you get one specific snack (output)." },
+        { "type": "text", "content": "Function notation: <b>f(x) = 2x + 3</b><br><br>This means: for any input x, the output is 2x + 3.<br>f(1) = 2(1) + 3 = 5<br>f(4) = 2(4) + 3 = 11" },
+        { "type": "callout", "kind": "info", "content": "📝 The <b>domain</b> is the set of all possible inputs. The <b>range</b> is the set of all possible outputs." },
+        { "type": "text", "content": "The <b>vertical line test</b> determines if a graph represents a function: if any vertical line crosses the graph more than once, it's NOT a function.<br><br>Examples of functions: f(x) = x², f(x) = √x, f(x) = 2ˣ<br>Not a function: x = y² (a sideways parabola)" },
+        { "type": "math", "content": "f(x) = √(x - 3)\nDomain: x ≥ 3 (can't take square root of negative)\nRange: y ≥ 0" },
+        { "type": "quiz-check", "question": "What is f(3) if f(x) = 2x² - 1?", "options": ["17", "11", "35", "5"], "correctIndex": 0, "explanation": "f(3) = 2(3²) - 1 = 2(9) - 1 = 18 - 1 = 17." }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Polynomials & Factoring",
+      "difficulty": "advanced",
+      "xpReward": 75,
+      "creditReward": 15,
+      "sections": [
+        { "type": "text", "content": "A <b>polynomial</b> is an expression with variables raised to whole-number powers, like 3x² + 2x - 5. <b>Factoring</b> is reversing multiplication — breaking a polynomial into simpler pieces." },
+        { "type": "text", "content": "Common factoring patterns:<br><br>📐 <b>GCF</b>: 6x² + 9x = 3x(2x + 3)<br>📐 <b>Difference of squares</b>: x² - 16 = (x-4)(x+4)<br>📐 <b>Perfect square trinomial</b>: x² + 6x + 9 = (x+3)²" },
+        { "type": "callout", "kind": "tip", "content": "💡 Always check for a <b>Greatest Common Factor (GCF)</b> first before trying other factoring methods!" },
+        { "type": "math", "content": "x² + 7x + 12 = (x+3)(x+4)\n\nWe need numbers that multiply to 12 and add to 7.\n3 × 4 = 12 and 3 + 4 = 7 ✓" },
+        { "type": "text", "content": "To factor a trinomial where the leading coefficient isn't 1:<br><br>Example: 2x² + 7x + 3<br><br>1. Multiply a × c: 2 × 3 = 6<br>2. Find factors of 6 that add to 7: 1 and 6<br>3. Split middle term: 2x² + x + 6x + 3<br>4. Factor by grouping: x(2x+1) + 3(2x+1) = (x+3)(2x+1)" },
+        { "type": "quiz-check", "question": "Factor x² - 25", "options": ["(x-5)(x+5)", "(x-5)²", "(x+5)²", "(x-25)(x+1)"], "correctIndex": 0, "explanation": "This is a difference of squares: x² - 25 = (x-5)(x+5)." }
+      ]
     }
   ]
 }

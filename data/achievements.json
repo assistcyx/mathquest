@@ -13,7 +13,7 @@
     "title": "Calculus Novice",
     "description": "Complete all calculus lessons",
     "icon": "∫",
-    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 6 },
+    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 9 },
     "creditReward": 50,
     "xpReward": 100
   },
@@ -22,7 +22,7 @@
     "title": "Python Basics",
     "description": "Complete all Python lessons",
     "icon": "🐍",
-    "condition": { "type": "lessons_completed", "subject": "python", "count": 6 },
+    "condition": { "type": "lessons_completed", "subject": "python", "count": 9 },
     "creditReward": 50,
     "xpReward": 100
   },
@@ -142,5 +142,41 @@
     "condition": { "type": "lessons_completed", "subject": "python", "count": 6 },
     "creditReward": 75,
     "xpReward": 200
+  },
+  {
+    "id": "trig_basics",
+    "title": "Trigonometry Apprentice",
+    "description": "Complete all trigonometry lessons",
+    "icon": "sin",
+    "condition": { "type": "lessons_completed", "subject": "trigonometry", "count": 3 },
+    "creditReward": 50,
+    "xpReward": 100
+  },
+  {
+    "id": "trig_master",
+    "title": "Trigonometry Master",
+    "description": "Score 100% on a trig quiz",
+    "icon": "📐",
+    "condition": { "type": "quiz_score", "score": 100 },
+    "creditReward": 50,
+    "xpReward": 150
+  },
+  {
+    "id": "calculus_complete",
+    "title": "Calculus Grandmaster",
+    "description": "Complete all 9 calculus lessons",
+    "icon": "∫",
+    "condition": { "type": "lessons_completed", "subject": "calculus", "count": 9 },
+    "creditReward": 100,
+    "xpReward": 300
+  },
+  {
+    "id": "python_complete",
+    "title": "Python Grandmaster",
+    "description": "Complete all 9 Python lessons",
+    "icon": "🐍",
+    "condition": { "type": "lessons_completed", "subject": "python", "count": 9 },
+    "creditReward": 100,
+    "xpReward": 300
   }
 ]

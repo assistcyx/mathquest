@@ -132,6 +132,15 @@
     LessonViewer.render(main, { subject: 'algebra', id: params.id });
   });
 
+  Router.register('/lessons/trigonometry/:id', (app, params) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    LessonViewer.render(main, { subject: 'trigonometry', id: params.id });
+  });
+
   Router.register('/partner', (app) => {
     app.innerHTML = '';
     app.appendChild(Header.render());

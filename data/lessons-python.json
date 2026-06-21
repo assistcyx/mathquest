@@ -96,6 +96,52 @@
         { "type": "code-block", "language": "python", "content": "class Dog:\n    species = \"Canine\"  # Class attribute (shared by all)\n    \n    def __init__(self, name):\n        self.name = name  # Instance attribute (unique per dog)\n    \n    def bark(self):\n        return f\"{self.name} says Woof!\"\n\nbuddy = Dog(\"Buddy\")\nprint(buddy.bark())  # Buddy says Woof!\nprint(buddy.species)  # Canine" },
         { "type": "quiz-check", "question": "What is the first parameter of every method in a Python class?", "options": ["this", "self", "me", "class"], "correctIndex": 1, "explanation": "Python uses 'self' as the first parameter of every instance method to refer to the current object." }
       ]
+    },
+    {
+      "id": 7,
+      "title": "List Comprehensions",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "<b>List comprehensions</b> are a concise way to create lists in Python. They let you write a for loop inside square brackets — cleaner and often faster than traditional loops." },
+        { "type": "code-block", "language": "python", "content": "# Traditional way\nsquares = []\nfor x in range(10):\n    squares.append(x**2)\n\n# List comprehension (much cleaner!)\nsquares = [x**2 for x in range(10)]\n\nprint(squares)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]" },
+        { "type": "text", "content": "The basic syntax: <b>[expression for item in iterable]</b><br><br>You can also add a condition: <b>[expression for item in iterable if condition]</b>" },
+        { "type": "code-block", "language": "python", "content": "# With a condition — only even numbers\nevens = [x for x in range(20) if x % 2 == 0]\nprint(evens)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]\n\n# With transformation\ncelsius = [0, 10, 20, 30]\nfahrenheit = [(c * 9/5) + 32 for c in celsius]\nprint(fahrenheit)  # [32.0, 50.0, 68.0, 86.0]" },
+        { "type": "callout", "kind": "tip", "content": "💡 You can also create dictionary comprehensions and set comprehensions! Just use {} instead of []." },
+        { "type": "code-block", "language": "python", "content": "# Dictionary comprehension\nsquares_dict = {x: x**2 for x in range(5)}\nprint(squares_dict)  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}\n\n# Set comprehension\nunique_lengths = {len(word) for word in [\"hello\", \"world\", \"hi\", \"python\"]}\nprint(unique_lengths)  # {2, 5}" },
+        { "type": "quiz-check", "question": "What does [x*2 for x in range(4)] produce?", "options": ["[0, 2, 4, 6]", "[2, 4, 6, 8]", "[0, 2, 4]", "[1, 2, 3, 4]"], "correctIndex": 0, "explanation": "Each x from 0 to 3 gets doubled: [0*2, 1*2, 2*2, 3*2] = [0, 2, 4, 6]." }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Modules & Packages",
+      "difficulty": "intermediate",
+      "xpReward": 50,
+      "creditReward": 10,
+      "sections": [
+        { "type": "text", "content": "A <b>module</b> is a file containing Python code (functions, classes, variables). A <b>package</b> is a collection of modules in a directory. Modules help you organize large projects." },
+        { "type": "code-block", "language": "python", "content": "# Import an entire module\nimport math\nprint(math.sqrt(16))  # 4.0\nprint(math.pi)        # 3.14159...\n\n# Import specific items\nfrom math import sqrt, pi\nprint(sqrt(25))  # 5.0\n\n# Import with alias\nimport numpy as np\nimport pandas as pd" },
+        { "type": "text", "content": "Python comes with a rich <b>standard library</b> of built-in modules:<br><br>📊 <b>math</b> — advanced math functions<br>📅 <b>datetime</b> — dates and times<br>🔢 <b>random</b> — random numbers<br>📂 <b>os</b> — operating system interface<br>💾 <b>json</b> — JSON data handling" },
+        { "type": "code-block", "language": "python", "content": "import random\nimport datetime\n\n# Random number between 1 and 10\nprint(random.randint(1, 10))\n\n# Today's date\ntoday = datetime.date.today()\nprint(today)\n\n# Pick a random choice\ncolors = [\"red\", \"blue\", \"green\"]\nprint(random.choice(colors))" },
+        { "type": "callout", "kind": "info", "content": "📝 You can create your own module by saving a .py file and importing it! If you have my_functions.py, just write: <b>import my_functions</b>" },
+        { "type": "quiz-check", "question": "Which keyword lets you import specific items from a module?", "options": ["from", "import", "using", "include"], "correctIndex": 0, "explanation": "The 'from' keyword is used with 'import' to import specific items: from math import sqrt." }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "File I/O & Context Managers",
+      "difficulty": "advanced",
+      "xpReward": 75,
+      "creditReward": 15,
+      "sections": [
+        { "type": "text", "content": "Reading and writing files is essential for real programs. Python makes file I/O simple with the built-in <b>open()</b> function and the <b>with</b> statement." },
+        { "type": "code-block", "language": "python", "content": "# Writing to a file\nwith open(\"notes.txt\", \"w\") as file:\n    file.write(\"Hello, MathQuest!\\n\")\n    file.write(\"Learning Python is fun!\")\n\n# Reading from a file\nwith open(\"notes.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n# File auto-closes after 'with' block!" },
+        { "type": "text", "content": "File modes:<br><br>📝 <b>'r'</b> — read (default)<br>✏️ <b>'w'</b> — write (overwrites!)<br>➕ <b>'a'</b> — append (adds to end)<br>📖 <b>'r+'</b> — read and write" },
+        { "type": "callout", "kind": "tip", "content": "💡 The <b>with</b> statement is a <b>context manager</b> — it automatically closes the file when you're done, even if an error occurs!" },
+        { "type": "code-block", "language": "python", "content": "# Reading line by line\nwith open(\"data.txt\", \"r\") as f:\n    for line in f:\n        print(line.strip())  # strip removes \\n\n\n# Working with JSON files\nimport json\ndata = {\"name\": \"Alice\", \"scores\": [95, 87, 92]}\n\n# Save as JSON\nwith open(\"data.json\", \"w\") as f:\n    json.dump(data, f, indent=2)\n\n# Load JSON\nwith open(\"data.json\", \"r\") as f:\n    loaded = json.load(f)\n    print(loaded[\"name\"])  # Alice" },
+        { "type": "quiz-check", "question": "What mode opens a file for appending?", "options": ["'a'", "'w'", "'r'", "'rw'"], "correctIndex": 0, "explanation": "'a' (append) adds new content to the end of the file without overwriting existing content." }
+      ]
     }
   ]
 }
