@@ -36,6 +36,7 @@ const GameState = {
         musicEnabled: false,
         aiApiKey: '',
         aiProvider: 'claude',
+        aiModel: '',
         aiApiKeyDeepseek: '',
         aiApiKeyOpenai: '',
         aiTutorEnabled: false,
