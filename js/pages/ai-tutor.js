@@ -349,6 +349,26 @@ const AiTutor = {
             </div>
           </div>
 
+          <!-- Skills bar -->
+          <div class="ai-context-bar" style="justify-content: space-between; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: var(--space-xs); flex: 1; min-width: 0;">
+              <span style="font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); white-space: nowrap;">🎯 Style:</span>
+              <select id="ai-skill-select" onchange="AiTutor._changeSkill(this.value)" style="
+                font-family: var(--font-body);
+                font-size: var(--text-xs);
+                padding: 2px 8px;
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius-full);
+                background: var(--color-bg-card);
+                cursor: pointer;
+                max-width: 160px;
+              ">
+                ${this._renderSkillOptions()}
+              </select>
+            </div>
+            ${typeof MemoryEngine !== 'undefined' && MemoryEngine.inspect().stats.totalFacts > 0 ? '<span class="memory-context-indicator" title="AI remembers your learning history">🧠 Memory active</span>' : ''}
+          </div>
+
           <!-- Context bar (when on a lesson/game page) -->
           ${hasContext ? `
             <div class="ai-context-bar">
@@ -427,6 +447,38 @@ const AiTutor = {
     if (ctx.gameType) return `🎮 ${ctx.gameType}`;
     if (ctx.subject) return `📚 ${ctx.subject}`;
     return 'Ready to help!';
+  },
+
+  // ========== SKILLS INTEGRATION ==========
+
+  get activeSkill() {
+    return GameState.get('settings.activeSkill') || '';
+  },
+
+  set activeSkill(val) {
+    GameState.set('settings.activeSkill', val);
+  },
+
+  _renderSkillOptions() {
+    var html = '<option value="">🎯 Default style</option>';
+    if (typeof SkillsEngine === 'undefined') return html;
+    var skills = SkillsEngine.getAll();
+    for (var i = 0; i < skills.length; i++) {
+      var s = skills[i];
+      var selected = s.id === this.activeSkill ? 'selected' : '';
+      html += '<option value="' + s.id + '" ' + selected + '>' + s.icon + ' ' + s.title + '</option>';
+    }
+    return html;
+  },
+
+  _changeSkill(skillId) {
+    this.activeSkill = skillId;
+    var skill = typeof SkillsEngine !== 'undefined' ? SkillsEngine.get(skillId) : null;
+    if (skill) {
+      Toast.show('🎯 Style: ' + skill.title, 'info');
+    } else {
+      Toast.show('🎯 Using default teaching style', 'info');
+    }
   },
 
   _scrollToBottom() {
@@ -512,6 +564,11 @@ const AiTutor = {
     // Append memory context (known topics, struggles, recent activity)
     if (typeof MemoryEngine !== 'undefined') {
       prompt += MemoryEngine.buildMemoryContext();
+    }
+
+    // Apply active teaching style
+    if (typeof SkillsEngine !== 'undefined') {
+      prompt = SkillsEngine.applyToSystemPrompt(prompt, this.activeSkill);
     }
 
     return prompt;

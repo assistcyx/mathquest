@@ -31,6 +31,7 @@ const Header = {
       { href: '#/mastery-path', text: '🎯 Mastery' },
       { href: '#/knowledge-base', text: '📚 Knowledge' },
       { href: '#/memory', text: '🧠 Memory' },
+      { href: '#/research', text: '🔬 Research' },
       { href: '#/partner', text: '🌟 Partner' },
       { href: '#/shop', text: '🛍️ Shop' }
     ];

@@ -17,6 +17,12 @@
   if (typeof PathEngine !== 'undefined') {
     PathEngine.load();
   }
+  if (typeof SkillsEngine !== 'undefined') {
+    SkillsEngine.load();
+  }
+  if (typeof ResearchEngine !== 'undefined') {
+    ResearchEngine.init();
+  }
 
   // Load data
   Promise.all([
@@ -169,6 +175,15 @@
     main.className = 'main-content';
     app.appendChild(main);
     MasteryPathPage.render(main);
+  });
+
+  Router.register('/research', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    ResearchPage.render(main);
   });
 
   Router.register('/lessons/algebra/:id', (app, params) => {
