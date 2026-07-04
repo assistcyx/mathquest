@@ -6,6 +6,18 @@
   AudioManager.init();
   MemoryEngine.init();
 
+  // Initialize Phase 2 engines
+  if (typeof MathQuestDB !== 'undefined') {
+    MathQuestDB.init().then(function() {
+      if (typeof KBEngine !== 'undefined') KBEngine.init();
+    }).catch(function(e) {
+      console.warn('IndexedDB not available, KB features disabled', e);
+    });
+  }
+  if (typeof PathEngine !== 'undefined') {
+    PathEngine.load();
+  }
+
   // Load data
   Promise.all([
     PartnerRenderer.load(),
@@ -139,6 +151,24 @@
     main.className = 'main-content';
     app.appendChild(main);
     MemoryInspector.render(main);
+  });
+
+  Router.register('/knowledge-base', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    KBManager.render(main);
+  });
+
+  Router.register('/mastery-path', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    MasteryPathPage.render(main);
   });
 
   Router.register('/lessons/algebra/:id', (app, params) => {

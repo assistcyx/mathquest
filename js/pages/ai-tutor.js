@@ -517,7 +517,7 @@ const AiTutor = {
     return prompt;
   },
 
-  _callAPI(systemPrompt, userMessage) {
+  async _callAPI(systemPrompt, userMessage) {
     this._abortController = new AbortController();
 
     const provider = this.providerConfig;
@@ -541,6 +541,16 @@ const AiTutor = {
       this._addMessage('assistant', `😅 No API key configured for ${provider.label}. Please set it up in settings (⚙️).`);
       this._isLoading = false;
       return;
+    }
+
+    // Append RAG context from knowledge base
+    if (typeof KBEngine !== 'undefined') {
+      try {
+        var ragContext = await KBEngine.buildRAGContext(userMessage);
+        if (ragContext) systemPrompt += ragContext;
+      } catch (e) {
+        // RAG unavailable, continue without it
+      }
     }
 
     const recentMessages = this._messages

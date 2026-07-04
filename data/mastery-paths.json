@@ -1,0 +1,186 @@
+[
+  {
+    "id": "calculus_fundamentals",
+    "title": "Calculus Fundamentals",
+    "subject": "calculus",
+    "icon": "∫",
+    "description": "Master the core concepts of calculus — from limits to integration",
+    "color": "#FF6B9D",
+    "gates": [
+      {
+        "id": "limits_gate",
+        "title": "Limits & Continuity",
+        "topicId": "limits",
+        "prerequisites": [],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "calculus", "id": 1 }]
+      },
+      {
+        "id": "derivatives_gate",
+        "title": "Derivatives",
+        "topicId": "derivatives",
+        "prerequisites": ["limits_gate"],
+        "requiredMastery": 0.6,
+        "lessons": [{ "subject": "calculus", "id": 2 }]
+      },
+      {
+        "id": "chain_rule_gate",
+        "title": "Chain Rule",
+        "topicId": "chain-rule",
+        "prerequisites": ["derivatives_gate"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "calculus", "id": 4 }]
+      },
+      {
+        "id": "product_quotient_gate",
+        "title": "Product & Quotient Rules",
+        "topicId": "product-quotient",
+        "prerequisites": ["derivatives_gate"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "calculus", "id": 5 }]
+      },
+      {
+        "id": "integration_gate",
+        "title": "Basic Integration",
+        "topicId": "basic-integration",
+        "prerequisites": ["derivatives_gate"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "calculus", "id": 3 }]
+      },
+      {
+        "id": "advanced_gate",
+        "title": "Advanced Topics",
+        "topicId": "lhopital",
+        "prerequisites": ["derivatives_gate", "limits_gate"],
+        "requiredMastery": 0.4,
+        "lessons": [{ "subject": "calculus", "id": 7 }]
+      }
+    ]
+  },
+  {
+    "id": "python_fundamentals",
+    "title": "Python Fundamentals",
+    "subject": "python",
+    "icon": "🐍",
+    "description": "Learn Python programming from scratch",
+    "color": "#34D399",
+    "gates": [
+      {
+        "id": "py_vars",
+        "title": "Variables & Data Types",
+        "topicId": "variables",
+        "prerequisites": [],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "python", "id": 1 }]
+      },
+      {
+        "id": "py_lists",
+        "title": "Lists & Loops",
+        "topicId": "lists-loops",
+        "prerequisites": ["py_vars"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "python", "id": 2 }]
+      },
+      {
+        "id": "py_funcs",
+        "title": "Functions",
+        "topicId": "functions",
+        "prerequisites": ["py_vars", "py_lists"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "python", "id": 3 }]
+      },
+      {
+        "id": "py_dicts",
+        "title": "Dictionaries & Sets",
+        "topicId": "dicts-sets",
+        "prerequisites": ["py_lists"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "python", "id": 4 }]
+      },
+      {
+        "id": "py_oop",
+        "title": "Classes & OOP",
+        "topicId": "classes-oop",
+        "prerequisites": ["py_funcs"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "python", "id": 6 }]
+      }
+    ]
+  },
+  {
+    "id": "algebra_foundations",
+    "title": "Algebra Foundations",
+    "subject": "algebra",
+    "icon": "🔢",
+    "description": "Build a strong foundation in algebraic thinking",
+    "color": "#FBBF24",
+    "gates": [
+      {
+        "id": "alg_linear",
+        "title": "Linear Equations",
+        "topicId": "linear-equations",
+        "prerequisites": [],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "algebra", "id": 1 }]
+      },
+      {
+        "id": "alg_quadratics",
+        "title": "Quadratics",
+        "topicId": "quadratics",
+        "prerequisites": ["alg_linear"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "algebra", "id": 2 }]
+      },
+      {
+        "id": "alg_systems",
+        "title": "Systems of Equations",
+        "topicId": "systems-equations",
+        "prerequisites": ["alg_linear"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "algebra", "id": 3 }]
+      },
+      {
+        "id": "alg_functions",
+        "title": "Functions & Domain",
+        "topicId": "functions-domain",
+        "prerequisites": ["alg_linear"],
+        "requiredMastery": 0.4,
+        "lessons": [{ "subject": "algebra", "id": 5 }]
+      }
+    ]
+  },
+  {
+    "id": "trigonometry_basics",
+    "title": "Trigonometry Basics",
+    "subject": "trigonometry",
+    "icon": "📐",
+    "description": "Understand triangles, the unit circle, and trig identities",
+    "color": "#9B59B6",
+    "gates": [
+      {
+        "id": "trig_ratios",
+        "title": "Trig Ratios",
+        "topicId": "trig-ratios",
+        "prerequisites": [],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "trigonometry", "id": 1 }]
+      },
+      {
+        "id": "trig_unit_circle",
+        "title": "The Unit Circle",
+        "topicId": "unit-circle",
+        "prerequisites": ["trig_ratios"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "trigonometry", "id": 2 }]
+      },
+      {
+        "id": "trig_identities",
+        "title": "Trig Identities & Graphs",
+        "topicId": "trig-identities",
+        "prerequisites": ["trig_unit_circle"],
+        "requiredMastery": 0.5,
+        "lessons": [{ "subject": "trigonometry", "id": 3 }]
+      }
+    ]
+  }
+]

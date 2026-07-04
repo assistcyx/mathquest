@@ -28,6 +28,8 @@ const Header = {
       { href: '#/lessons', text: '📚 Lessons' },
       { href: '#/games', text: '🎮 Games' },
       { href: '#/ai-tutor', text: '🤖 AI Tutor' },
+      { href: '#/mastery-path', text: '🎯 Mastery' },
+      { href: '#/knowledge-base', text: '📚 Knowledge' },
       { href: '#/memory', text: '🧠 Memory' },
       { href: '#/partner', text: '🌟 Partner' },
       { href: '#/shop', text: '🛍️ Shop' }
