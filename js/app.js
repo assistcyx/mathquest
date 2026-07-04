@@ -4,6 +4,7 @@
   // Initialize state
   GameState.init();
   AudioManager.init();
+  MemoryEngine.init();
 
   // Load data
   Promise.all([
@@ -12,6 +13,14 @@
   ]).then(() => {
     // Check achievements on load
     AchievementEngine.check();
+  });
+
+  // Hook into GameState for automatic memory tracing
+  GameState.on('lesson:completed', function(subject, lessonId) {
+    MemoryEngine.trace('lesson', 'completed', { subject: subject, lessonId: lessonId });
+    // Also store as a fact
+    var key = 'mastery.' + subject + '.' + lessonId;
+    MemoryEngine.rememberFact(key, 0.6, 0.5);
   });
 
   // Register routes
@@ -121,6 +130,15 @@
     main.className = 'main-content';
     app.appendChild(main);
     AiTutor.render(main);
+  });
+
+  Router.register('/memory', (app) => {
+    app.innerHTML = '';
+    app.appendChild(Header.render());
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+    MemoryInspector.render(main);
   });
 
   Router.register('/lessons/algebra/:id', (app, params) => {

@@ -227,6 +227,10 @@ const LessonViewer = {
       if (typeof AdaptiveEngine !== 'undefined') {
         AdaptiveEngine.updateMasteryFromLesson(subject, lessonId);
       }
+      // Trace to memory system
+      if (typeof MemoryEngine !== 'undefined') {
+        MemoryEngine.trace('lesson', 'completed', { subject: subject, lessonId: lessonId });
+      }
       AchievementEngine.check();
     }
     // Re-render to show completed state

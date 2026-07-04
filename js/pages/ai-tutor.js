@@ -338,6 +338,7 @@ const AiTutor = {
               <div style="display: flex; align-items: center; gap: var(--space-xs); flex-wrap: wrap;">
                 AI Tutor
                 <span class="ai-header-badge">${this.currentModel}</span>
+                ${typeof MemoryEngine !== 'undefined' && MemoryEngine.inspect().stats.totalFacts > 0 ? '<span class="memory-context-indicator" title="AI remembers your learning history">🧠 Memory active</span>' : ''}
               </div>
               <div class="ai-subtitle">${contextLabel}</div>
             </div>
@@ -506,6 +507,11 @@ const AiTutor = {
     }
     if (ctx.gameType) {
       prompt += `\nThe student just played: ${ctx.gameType}. You can help them understand concepts they might have gotten wrong.`;
+    }
+
+    // Append memory context (known topics, struggles, recent activity)
+    if (typeof MemoryEngine !== 'undefined') {
+      prompt += MemoryEngine.buildMemoryContext();
     }
 
     return prompt;

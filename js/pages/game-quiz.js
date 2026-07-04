@@ -1,183 +1,287 @@
 const QuizGame = {
   _questions: [],
-  _currentIndex: 0,
+  _currentQuestion: 0,
   _score: 0,
-  _totalQuestions: 10,
-  _timeLimit: 60,
+  _totalQuestions: 0,
+  _timer: null,
   _isPlaying: false,
-  _answered: false,
-  _timerStarted: false,
+  _difficulty: 'easy',
+  _subject: 'calculus',
+  _gameData: null,
+  _useAiGeneration: false,
 
   async render(container) {
     container.innerHTML = `<div class="loading-spinner"></div>`;
 
     try {
-      const config = await fetch('data/games-config.json').then(r => r.json());
-      this._questions = config.quiz?.questions || [];
-
-      // Apply adaptive difficulty if enabled
-      if (typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled()) {
-        const calcMastery = AdaptiveEngine.getSubjectMastery('calculus');
-        const pyMastery = AdaptiveEngine.getSubjectMastery('python');
-        const avgMastery = (calcMastery + pyMastery) / 2;
-        // Auto-select difficulty based on mastery
-        if (avgMastery >= 0.6) this._difficulty = 'hard';
-        else if (avgMastery >= 0.3) this._difficulty = 'medium';
-        else this._difficulty = 'easy';
-      }
+      const res = await fetch('data/games-config.json');
+      this._gameData = await res.json();
+      this._renderStart(container);
     } catch (e) {
-      this._questions = this._getDefaultQuestions();
+      container.innerHTML = '<div class="empty-state">Failed to load game data</div>';
     }
-
-    this._currentIndex = 0;
-    this._score = 0;
-    this._isPlaying = false;
-    this._answered = false;
-    this._timerStarted = false;
-
-    this._renderStart(container);
-  },
-
-  _getDefaultQuestions() {
-    return [
-      { id: 'q1', subject: 'calculus', difficulty: 'easy', question: 'What is the derivative of x²?', options: ['2x', 'x', '2', 'x²/2'], correctIndex: 0, hint: 'Power rule: bring down the exponent' },
-      { id: 'q2', subject: 'calculus', difficulty: 'easy', question: 'What is the limit of 1/x as x approaches infinity?', options: ['0', '1', 'Infinity', 'Undefined'], correctIndex: 0, hint: 'Think about what happens when x gets very large' },
-      { id: 'q3', subject: 'calculus', difficulty: 'easy', question: 'What is the integral of 2x?', options: ['x² + C', '2 + C', 'x²/2 + C', '2x² + C'], correctIndex: 0, hint: 'Reverse of derivative' },
-      { id: 'q4', subject: 'calculus', difficulty: 'medium', question: 'What does the derivative represent?', options: ['Rate of change', 'Area under curve', 'Sum of values', 'Average value'], correctIndex: 0, hint: 'Think about slope' },
-      { id: 'q5', subject: 'calculus', difficulty: 'medium', question: 'What is the derivative of sin(x)?', options: ['cos(x)', '-sin(x)', 'tan(x)', '-cos(x)'], correctIndex: 0, hint: 'Think about the derivative of trig functions' },
-      { id: 'q6', subject: 'calculus', difficulty: 'easy', question: 'What is the integral of 1?', options: ['x + C', '0', '1 + C', 'x² + C'], correctIndex: 0, hint: 'What function has derivative 1?' },
-      { id: 'q7', subject: 'calculus', difficulty: 'medium', question: 'What is the limit of (sin x)/x as x approaches 0?', options: ['1', '0', 'Infinity', 'Undefined'], correctIndex: 0, hint: 'This is a famous limit!' },
-      { id: 'q8', subject: 'calculus', difficulty: 'hard', question: 'What is the derivative of e^x?', options: ['e^x', 'xe^(x-1)', 'ln(x)e^x', '1'], correctIndex: 0, hint: 'e^x is special' },
-      { id: 'q9', subject: 'calculus', difficulty: 'medium', question: 'What is the chain rule used for?', options: ['Composite functions', 'Product of functions', 'Quotient of functions', 'Inverse functions'], correctIndex: 0, hint: 'Functions within functions' },
-      { id: 'q10', subject: 'calculus', difficulty: 'hard', question: 'What is the derivative of ln(x)?', options: ['1/x', '1/x²', 'ln(x)', 'x'], correctIndex: 0, hint: 'Think about the derivative of natural log' },
-    ];
   },
 
   _renderStart(container) {
-    const name = GameState.get('player.name') || '';
-    const isAdaptive = typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled();
-    const autoDiff = this._difficulty || 'easy';
-    const diffLabels = { easy: '🌟 Easy', medium: '🔥 Medium', hard: '⚡ Hard' };
+    const hasApiKey = GameState.get('settings.aiApiKey') && GameState.get('settings.aiApiKey') !== 'demo_mode' ||
+      GameState.get('settings.aiApiKeyOpenai') ||
+      GameState.get('settings.aiApiKeyDeepseek');
 
     container.innerHTML = `
-      <div class="game-container animate-fade-in" style="text-align: center;">
-        <div style="font-size: 3rem; margin-bottom: var(--space-md);">🧮</div>
-        <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-sm);">Calculus Quiz</h2>
-        <p style="color: var(--color-text-secondary); margin-bottom: var(--space-xl);">
-          Answer ${this._totalQuestions} calculus questions as fast as you can!<br>
-          Earn 5 credits per correct answer.
-        </p>
-        ${isAdaptive ? `<div style="margin-bottom: var(--space-md);"><span class="badge badge-purple">🤖 Adaptive: ${diffLabels[autoDiff]}</span></div>` : ''}
-        <div style="margin-bottom: var(--space-xl);">
-          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Difficulty</p>
-          <div class="difficulty-select">
-            <button class="difficulty-btn ${autoDiff === 'easy' || (!isAdaptive && autoDiff === 'easy') ? 'selected' : ''}" data-diff="easy" onclick="QuizGame._setDifficulty(this, 'easy')">🌟 Easy</button>
-            <button class="difficulty-btn ${autoDiff === 'medium' ? 'selected' : ''}" data-diff="medium" onclick="QuizGame._setDifficulty(this, 'medium')">🔥 Medium</button>
-            <button class="difficulty-btn ${autoDiff === 'hard' ? 'selected' : ''}" data-diff="hard" onclick="QuizGame._setDifficulty(this, 'hard')">⚡ Hard</button>
+      <div class="page animate-fade-in">
+        <div class="page-header">
+          <h1>🎯 Quiz Challenge</h1>
+          <p>Test your knowledge with multiple-choice questions</p>
+        </div>
+
+        <div class="game-container">
+          <div class="game-card" style="text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: var(--space-lg);">🎯</div>
+            <h2 style="margin-bottom: var(--space-md);">Ready to Test Your Skills?</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
+              Answer multiple-choice questions on calculus, Python, algebra, and trigonometry.
+              ${hasApiKey ? 'Generate fresh questions with AI!' : 'Add an API key in AI Tutor to enable AI-generated questions.'}
+            </p>
+
+            <div style="margin-bottom: var(--space-lg);">
+              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Subject</p>
+              <div style="display: flex; gap: var(--space-xs); justify-content: center; flex-wrap: wrap;">
+                <button class="difficulty-btn selected" onclick="QuizGame._selectSubject('calculus')" data-subj="calculus">∫ Calculus</button>
+                <button class="difficulty-btn" onclick="QuizGame._selectSubject('python')" data-subj="python">🐍 Python</button>
+                <button class="difficulty-btn" onclick="QuizGame._selectSubject('algebra')" data-subj="algebra">🔢 Algebra</button>
+                <button class="difficulty-btn" onclick="QuizGame._selectSubject('trigonometry')" data-subj="trigonometry">📐 Trig</button>
+              </div>
+            </div>
+
+            <div style="margin-bottom: var(--space-lg);">
+              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Difficulty</p>
+              <div style="display: flex; gap: var(--space-xs); justify-content: center;">
+                <button class="difficulty-btn selected" onclick="QuizGame._selectDifficulty('easy')">😊 Easy</button>
+                <button class="difficulty-btn" onclick="QuizGame._selectDifficulty('medium')">🤔 Medium</button>
+                <button class="difficulty-btn" onclick="QuizGame._selectDifficulty('hard')">😈 Hard</button>
+              </div>
+            </div>
+
+            ${hasApiKey ? `
+            <div style="margin-bottom: var(--space-lg); padding: var(--space-md); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+              <label style="display: flex; align-items: center; gap: var(--space-sm); justify-content: center; cursor: pointer;">
+                <input type="checkbox" id="ai-gen-toggle" onchange="QuizGame._toggleAiGeneration(this.checked)">
+                <span style="font-weight: 600;">🧠 Generate questions with AI</span>
+              </label>
+              <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-xs);">
+                Uses your AI provider to create fresh questions tailored to your chosen subject and difficulty.
+              </p>
+            </div>
+            ` : ''}
+
+            <button class="btn btn-primary btn-lg" onclick="QuizGame._startGame()">🚀 Start Quiz</button>
           </div>
         </div>
-        <button class="btn btn-primary btn-lg" onclick="QuizGame._startGame()">🚀 Start Quiz!</button>
       </div>
     `;
-
-    // Set AI tutor context
-    if (typeof AiTutor !== 'undefined') {
-      AiTutor._setContext({ currentPage: 'game', gameType: 'Calculus Quiz' });
-    }
   },
 
-  _setDifficulty(btn, diff) {
-    document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    // Adjust time and questions based on difficulty
-    const settings = { easy: { time: 60, questions: 8 }, medium: { time: 45, questions: 10 }, hard: { time: 30, questions: 12 } };
-    this._timeLimit = settings[diff].time;
-    this._totalQuestions = Math.min(settings[diff].questions, this._questions.length);
+  _selectSubject(subject) {
+    this._subject = subject;
+    document.querySelectorAll('[data-subj]').forEach(btn => {
+      btn.classList.toggle('selected', btn.getAttribute('data-subj') === subject);
+    });
+  },
+
+  _selectDifficulty(diff) {
     this._difficulty = diff;
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      const isDiff = btn.textContent.includes(diff.charAt(0).toUpperCase() + diff.slice(1));
+      btn.classList.toggle('selected', isDiff && btn.parentElement?.parentElement?.querySelector('p')?.textContent.includes('Difficulty'));
+    });
   },
 
-  _startGame() {
-    this._isPlaying = true;
-    this._currentIndex = 0;
-    this._score = 0;
-    this._timerStarted = false;
+  _toggleAiGeneration(enabled) {
+    this._useAiGeneration = enabled;
+  },
 
-    // Apply adaptive difficulty question filtering
-    if (typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled() && this._difficulty) {
-      // Filter questions by the selected/adaptive difficulty
-      const diffQuestions = this._questions.filter(q => q.difficulty === this._difficulty);
-      if (diffQuestions.length >= this._totalQuestions) {
-        this._questions = diffQuestions;
+  async _startGame() {
+    this._currentQuestion = 0;
+    this._score = 0;
+    this._isPlaying = true;
+
+    const container = document.querySelector('.game-container');
+    if (!container) return;
+
+    // Show loading
+    container.innerHTML = '<div class="loading-spinner"></div><p style="text-align: center; margin-top: var(--space-md);">Preparing questions...</p>';
+
+    if (this._useAiGeneration) {
+      // Try AI generation first
+      try {
+        container.innerHTML = '<div class="loading-spinner"></div><p style="text-align: center; margin-top: var(--space-md);">🧠 Generating questions with AI...</p>';
+        const generated = await QuizGenerator.generate({
+          subject: this._subject,
+          difficulty: this._difficulty,
+          count: 8
+        });
+        if (generated && generated.length > 0) {
+          this._questions = generated;
+        } else {
+          Toast.show('AI generation unavailable, using saved questions', 'info');
+          this._questions = this._loadQuestions();
+        }
+      } catch (e) {
+        console.warn('AI generation failed, falling back:', e);
+        Toast.show('Using saved questions', 'info');
+        this._questions = this._loadQuestions();
       }
+    } else {
+      this._questions = this._loadQuestions();
     }
 
-    this._renderQuestion(document.querySelector('.game-container')?.closest('#app') || document.getElementById('app'));
-  },
-
-  _renderQuestion(container) {
-    if (this._currentIndex >= this._totalQuestions) {
-      this._endGame(container);
+    if (!this._questions || this._questions.length === 0) {
+      container.innerHTML = `
+        <div class="game-card" style="text-align: center;">
+          <p>No questions available for this selection.</p>
+          <button class="btn btn-primary" onclick="QuizGame.render(document.querySelector('#app'))">Back</button>
+        </div>
+      `;
       return;
     }
 
-    const q = this._questions[this._currentIndex];
-    this._answered = false;
+    // Shuffle
+    this._questions = this._shuffle(this._questions);
+    this._totalQuestions = Math.min(this._questions.length, this._getQuestionCount());
 
-    // Cache question for smart hints
+    const timerSeconds = this._difficulty === 'easy' ? 60 : this._difficulty === 'medium' ? 45 : 30;
+
+    this._renderGame(container, timerSeconds);
+    this._renderQuestion();
+    this._startTimer(timerSeconds);
+  },
+
+  _loadQuestions() {
+    if (!this._gameData || !this._gameData.quiz) return [];
+
+    let questions = this._gameData.quiz.questions || [];
+
+    // Filter by subject
+    if (this._subject !== 'calculus') {
+      questions = questions.filter(q => q.subject === this._subject);
+    } else {
+      // For calculus, include calculus + general math questions
+      questions = questions.filter(q => q.subject === 'calculus' || q.subject === 'general');
+    }
+
+    // Apply adaptive difficulty
+    if (typeof AdaptiveEngine !== 'undefined' && AdaptiveEngine.isEnabled()) {
+      // Filter by recommended difficulty level
+      const subjectTopics = Object.entries(AdaptiveEngine.TOPICS)
+        .filter(([_, t]) => t.subject === this._subject)
+        .map(([id]) => AdaptiveEngine.getRecommendedDifficulty(id));
+
+      const avgDifficulty = subjectTopics.length > 0
+        ? subjectTopics.reduce((a, b) => {
+            const dMap = { easy: 0, medium: 1, hard: 2 };
+            return dMap[a] + dMap[b];
+          }) / subjectTopics.length
+        : 0;
+
+      if (avgDifficulty > 1.5) {
+        questions = questions.filter(q => q.difficulty !== 'easy');
+      } else if (avgDifficulty > 0.5) {
+        questions = questions.filter(q => q.difficulty !== 'hard');
+      }
+    }
+
+    return questions;
+  },
+
+  _getQuestionCount() {
+    return this._difficulty === 'easy' ? 8 : this._difficulty === 'medium' ? 10 : 12;
+  },
+
+  _renderGame(container, timerSeconds) {
+    const diffLabel = this._difficulty.charAt(0).toUpperCase() + this._difficulty.slice(1);
+    container.innerHTML = `
+      <div class="game-card">
+        <div class="game-header">
+          <div class="game-header-left">
+            <span class="badge badge-pink">🎯 Quiz</span>
+            <span class="badge badge-green">${diffLabel}</span>
+            ${this._useAiGeneration ? '<span class="badge badge-purple">🧠 AI Generated</span>' : ''}
+          </div>
+          <div class="game-header-right">
+            <span id="quiz-timer">${timerSeconds}s</span>
+          </div>
+        </div>
+
+        <div class="progress-dots" id="progress-dots">
+          ${Array.from({ length: this._totalQuestions }, (_, i) =>
+            `<span class="progress-dot ${i === 0 ? 'active' : ''}"></span>`
+          ).join('')}
+        </div>
+
+        <div id="question-area" class="question-area">
+          <!-- Question rendered here -->
+        </div>
+
+        <div class="game-score">
+          Score: <strong id="score-display">0</strong> / ${this._totalQuestions}
+        </div>
+      </div>
+    `;
+  },
+
+  _renderQuestion() {
+    const area = document.getElementById('question-area');
+    if (!area) return;
+
+    const q = this._questions[this._currentQuestion];
+    if (!q) {
+      this._endGame();
+      return;
+    }
+
+    // Cache for hints
     if (typeof SmartHints !== 'undefined') {
       SmartHints.cacheQuestion(q);
     }
 
-    container.innerHTML = `
-      <div class="game-container animate-fade-in">
-        <div class="game-header">
-          <div class="game-score">⭐ ${this._score}/${this._currentIndex}</div>
-          <div id="quiz-timer"></div>
+    const qNum = this._currentQuestion + 1;
+
+    area.innerHTML = `
+      <div class="quiz-question" style="animation: fadeInUp 0.3s ease;">
+        <div class="quiz-question-header">
+          <span class="badge badge-pink">Question ${qNum}/${this._totalQuestions}</span>
+          <span class="badge badge-green">${q.difficulty || 'medium'}</span>
         </div>
-
-        <div style="margin-bottom: var(--space-md); display: flex; gap: var(--space-xs); justify-content: center;">
-          ${Array.from({length: this._totalQuestions}, (_, i) => `
-            <div style="width: 20px; height: 6px; border-radius: 3px; background: ${i < this._currentIndex ? 'var(--color-success)' : i === this._currentIndex ? 'var(--color-primary)' : 'var(--color-border)'};"></div>
-          `).join('')}
+        <p class="quiz-question-text">${q.question}</p>
+        <div class="quiz-options" id="quiz-options">
+          ${(q.options || []).map((opt, i) =>
+            `<button class="quiz-option" onclick="QuizGame._selectAnswer(this, ${i}, ${q.correctIndex})">
+              <span class="option-letter">${'ABCD'[i]}</span>
+              <span>${opt}</span>
+            </button>`
+          ).join('')}
         </div>
-
-        <div class="quiz-question">${q.question}</div>
-
-        <div class="quiz-options">
-          ${q.options.map((opt, i) => `
-            <button class="quiz-option" onclick="QuizGame._selectAnswer(this, ${i}, ${q.correctIndex})">
-              <span class="option-letter">${'ABCD'[i]}</span> ${opt}
-            </button>
-          `).join('')}
-        </div>
-
-        <div id="quiz-explain" style="display: none;"></div>
-
-        ${typeof SmartHints !== 'undefined' ? SmartHints.renderHintButton(q, 'quiz-' + this._currentIndex) : ''}
+        ${typeof SmartHints !== 'undefined' ? SmartHints.renderHintButton(q, 'quiz-' + this._currentQuestion) : ''}
+        <div id="quiz-feedback" class="quiz-feedback" style="display: none;"></div>
       </div>
     `;
 
-    if (!this._timerStarted) {
-      this._timerStarted = true;
-      GameTimer.start(this._timeLimit, () => this._endGame(container), (remaining) => {
-        const timerEl = document.getElementById('quiz-timer');
-        if (timerEl) {
-          timerEl.innerHTML = GameTimer.renderBar(remaining, this._timeLimit);
-        }
-      });
-    } else {
-      const timerEl = document.getElementById('quiz-timer');
-      if (timerEl) {
-        timerEl.innerHTML = GameTimer.renderBar(GameTimer.getRemaining(), this._timeLimit);
-      }
-    }
+    // Update progress dots
+    document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+      dot.className = 'progress-dot' +
+        (i < this._currentQuestion ? ' completed' : '') +
+        (i === this._currentQuestion ? ' active' : '');
+    });
   },
 
   _selectAnswer(btn, selected, correct) {
-    if (this._answered) return;
-    this._answered = true;
+    if (!this._isPlaying) return;
+    this._isPlaying = false;
 
     const options = document.querySelectorAll('.quiz-option');
+    const feedback = document.getElementById('quiz-feedback');
+    const q = this._questions[this._currentQuestion];
+
     options.forEach(o => o.classList.add('disabled'));
     btn.classList.add(selected === correct ? 'correct' : 'incorrect');
 
@@ -185,86 +289,137 @@ const QuizGame = {
       options[correct].classList.add('correct');
     }
 
-    const q = this._questions[this._currentIndex];
-    const explainEl = document.getElementById('quiz-explain');
-    if (explainEl) {
-      explainEl.style.display = 'block';
-      explainEl.innerHTML = `
-        <strong>${selected === correct ? '✅ Correct!' : '❌ Incorrect'}</strong><br>
-        ${q.hint || ''}
-      `;
-    }
-
     if (selected === correct) {
       this._score++;
+      document.getElementById('score-display').textContent = this._score;
       AudioManager.play('correct');
+      feedback.innerHTML = `<div class="callout callout-success">✅ Correct! ${q.explanation || ''}</div>`;
     } else {
       AudioManager.play('incorrect');
+      feedback.innerHTML = `<div class="callout callout-error">❌ Oops! The correct answer was: <strong>${q.options[correct]}</strong><br>${q.explanation || ''}</div>`;
     }
 
-    // Auto-advance after delay
-    setTimeout(() => {
-      this._currentIndex++;
-      this._renderQuestion(document.querySelector('.game-container')?.closest('#app') || document.getElementById('app'));
-    }, 1500);
+    feedback.style.display = 'block';
+
+    // Trace answer to memory
+    if (typeof MemoryEngine !== 'undefined') {
+      MemoryEngine.trace('quiz', 'answered', {
+        questionId: q.id || ('q_' + this._currentQuestion),
+        correct: selected === correct,
+        subject: q.subject || this._subject,
+        difficulty: q.difficulty || this._difficulty
+      });
+    }
+
+    this._currentQuestion++;
+
+    if (this._currentQuestion >= this._totalQuestions) {
+      setTimeout(() => this._endGame(), 1500);
+    } else {
+      setTimeout(() => {
+        this._isPlaying = true;
+        this._renderQuestion();
+      }, 1500);
+    }
   },
 
-  _endGame(container) {
-    GameTimer.stop();
+  _startTimer(seconds) {
+    if (typeof GameTimer !== 'undefined') {
+      GameTimer.start(seconds, (timeLeft) => {
+        const timerEl = document.getElementById('quiz-timer');
+        if (timerEl) {
+          timerEl.textContent = timeLeft + 's';
+          if (timeLeft <= 10) timerEl.style.color = 'var(--color-error)';
+        }
+      }, () => {
+        // Time's up - force end
+        if (this._isPlaying) {
+          this._isPlaying = false;
+          Toast.show('⏰ Time\'s up!', 'error');
+          this._endGame();
+        }
+      });
+    }
+  },
 
-    const total = this._currentIndex;
-    const reward = CreditEngine.awardGameReward('quizCorrect', this._score, total);
-    const creditsEarned = reward?.credits || 0;
-    const xpEarned = reward?.xp || 0;
-
-    GameState.addGameStats('quiz', this._score, total);
-
-    // Update adaptive mastery
-    if (typeof AdaptiveEngine !== 'undefined') {
-      AdaptiveEngine.updateMastery('limits', this._score, total);
-      AdaptiveEngine.updateMastery('derivatives', this._score, total);
+  _endGame() {
+    if (typeof GameTimer !== 'undefined') {
+      GameTimer.stop();
     }
 
+    const container = document.querySelector('.game-container');
+    if (!container) return;
+
+    const total = this._totalQuestions;
+    const correct = this._score;
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+    // Update game stats
+    GameState.addGameStats('quiz', correct, total);
+    GameState.set('partner.currentMood', pct >= 70 ? 'celebrating' : pct >= 40 ? 'encouraging' : 'sad');
+
+    // Update adaptive mastery
+    if (typeof AdaptiveEngine !== 'undefined' && this._subject) {
+      // Update relevant topic masteries
+      const subjectTopics = Object.entries(AdaptiveEngine.TOPICS)
+        .filter(([_, t]) => t.subject === this._subject);
+      subjectTopics.forEach(([topicId]) => {
+        AdaptiveEngine.updateMastery(topicId, correct, total);
+      });
+    }
+
+    // Calculate rewards
+    let rewardCredits = 0;
+    let rewardXp = 0;
+    if (typeof CreditEngine !== 'undefined') {
+      const reward = CreditEngine.awardGameReward('quiz', correct, total);
+      rewardCredits = reward.credits || 0;
+      rewardXp = reward.xp || 0;
+    } else {
+      rewardCredits = Math.floor(correct * 1.5);
+      rewardXp = correct * 10;
+      GameState.addCredits(rewardCredits);
+      GameState.addXp(rewardXp);
+    }
+
+    AchievementEngine.check();
+
     container.innerHTML = `
-      <div class="game-container animate-bounce-in">
+      <div class="game-card" style="text-align: center; animation: fadeInUp 0.5s ease;">
+        <div style="font-size: 4rem; margin-bottom: var(--space-md);">
+          ${pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '💪'}
+        </div>
+        <h2 style="margin-bottom: var(--space-md);">${pct >= 90 ? 'Perfect!' : pct >= 70 ? 'Great Job!' : pct >= 50 ? 'Good Try!' : 'Keep Practicing!'}</h2>
+
         <div class="game-results">
-          ${this._score === this._totalQuestions ? '🏆' : this._score >= this._totalQuestions * 0.7 ? '🎉' : '💪'}
-          <div class="score-big">${this._score}/${this._totalQuestions}</div>
-          <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
-            ${this._score === this._totalQuestions ? 'Perfect score! Amazing!' :
-              this._score >= this._totalQuestions * 0.7 ? 'Great job! Keep it up!' :
-              'Good effort! Practice makes perfect!'}
-          </p>
-
-          <div class="result-stats">
-            <div class="result-stat">
-              <div class="value">+${creditsEarned}</div>
-              <div class="label">Credits earned</div>
-            </div>
-            <div class="result-stat">
-              <div class="value">+${xpEarned}</div>
-              <div class="label">XP earned</div>
-            </div>
-            <div class="result-stat">
-              <div class="value">${FormatUtils.percentage(this._score, this._totalQuestions)}</div>
-              <div class="label">Accuracy</div>
-            </div>
+          <div class="result-item">
+            <span class="result-label">Correct</span>
+            <span class="result-value" style="color: var(--color-success);">${correct}/${total}</span>
           </div>
-
-          <div style="display: flex; gap: var(--space-sm); justify-content: center;">
-            <button class="btn btn-primary" onclick="QuizGame._startGame()">🔄 Play Again</button>
-            <button class="btn btn-ghost" onclick="Router.navigate('/games')">← Back to Games</button>
+          <div class="result-item">
+            <span class="result-label">Accuracy</span>
+            <span class="result-value">${pct}%</span>
           </div>
+          <div class="result-item">
+            <span class="result-label">Reward</span>
+            <span class="result-value">⭐ ${rewardCredits} · ✨ ${rewardXp} XP</span>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-lg); display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg" onclick="QuizGame._startGame()">🔄 Play Again</button>
+          <button class="btn btn-ghost" onclick="Router.navigate('/games')">🎮 All Games</button>
         </div>
       </div>
     `;
+  },
 
-    GameState.set('partner.currentMood', this._score === this._totalQuestions ? 'celebrating' : 'happy');
-    AchievementEngine.check();
-
-    // Set AI tutor context
-    if (typeof AiTutor !== 'undefined') {
-      AiTutor._setContext({ currentPage: 'game', gameType: 'Calculus Quiz' });
+  _shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
+    return a;
   }
 };

@@ -45,6 +45,15 @@ const SmartHints = {
     const totalHints = GameState.get('gameStats.totalHintsUsed') || 0;
     GameState.set('gameStats.totalHintsUsed', totalHints + 1);
 
+    // Trace to memory system
+    if (typeof MemoryEngine !== 'undefined') {
+      MemoryEngine.trace('hint', 'used', {
+        questionId: hintKey,
+        hintLevel: newCount - 1,
+        subject: question.subject || 'unknown'
+      });
+    }
+
     return this.getHint(question, newCount - 1);
   },
 

@@ -76,6 +76,17 @@ const AdaptiveEngine = {
     const mastery = GameState.get('mastery') || {};
     mastery[topicId] = Math.round(newMastery * 100) / 100;
     GameState.set('mastery', mastery);
+
+    // Mirror to MemoryEngine
+    if (typeof MemoryEngine !== 'undefined') {
+      const eventId = MemoryEngine.trace('quiz', 'mastery_updated', { topicId: topicId, score: score, newMastery: Math.round(newMastery * 100) / 100 });
+      MemoryEngine.rememberFact('mastery.' + topicId, Math.round(newMastery * 100) / 100, 0.7, eventId);
+      // If score is low, record a struggle fact
+      if (score < 0.5) {
+        MemoryEngine.rememberFact('struggle.' + topicId, 'Struggles with ' + (this.TOPICS[topicId]?.label || topicId), 0.4, eventId);
+      }
+    }
+
     AchievementEngine.check();
   },
 
