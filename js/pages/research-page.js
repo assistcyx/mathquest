@@ -126,7 +126,7 @@ const ResearchPage = {
           '<div style="font-size: var(--text-xs); color: var(--color-text-muted);">' +
             dateStr + ' · ' + (result.depth === 'deep' ? '🔬 Deep' : '📄 Standard') + ' · ' + result.elapsed + 's' +
           '</div>' +
-        </div>' +
+        '</div>' +
         '<div style="display: flex; gap: var(--space-xs);">' +
           '<button class="btn btn-sm btn-ghost" onclick="ResearchPage._copyReport(' + result.id.replace('res_', '') + ')" title="Copy">📋</button>' +
         '</div>' +
